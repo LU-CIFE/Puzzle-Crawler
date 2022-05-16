@@ -4,7 +4,7 @@
 Game can be accessed publicly at `lu-sife.github.io`.
 
 
-## Puzzle-Crawler is a text-based, puzzle/dungeon-crawler game with some rogue-like elements.
+### Puzzle-Crawler is a text-based, puzzle/dungeon-crawler game with some rogue-like elements.
 
 ## PAUSE MENU
 
@@ -14,13 +14,13 @@ Hit `Esc` to resume.
 
 ## MOVEMENT
 
-`WASD` to move your character `0`
+`WASD` to move your character (`0`)
 
 ## ATTACKING
 
 Move into an enemy `&` to attack them.
 Your damage begins at `1`, but increases if you decide to upgrade.
-Each enemy needs to be dead to proceed to the next room through the door `#` or `_`
+Each enemy needs to be dead to proceed to the next room through the door (`#` or `_`)
 
 ## POTIONS
 
