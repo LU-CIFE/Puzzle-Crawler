@@ -1209,7 +1209,7 @@
 					} else if (upgrade_state = 1) {
 	//first selection
 						if (cursor_pos == 32) {
-							if (cash - 1 >= 0) {
+							if (cash >= 1) {
 								cash--;
 								atk ++;
 								shake_effect("cash_container");
@@ -1218,7 +1218,7 @@
 							
 	//second selection
 						} else if (cursor_pos == 55) {
-							if (cash - 1 >= 0) {
+							if (cash >= 1) {
 								cash--;
 								max_health ++;
 								shake_effect("cash_container");
@@ -1230,6 +1230,7 @@
 								recovery ++;
 								shake_effect("recovery_container");
 								shake_effect("cash_container");
+							}
 						}
 						
 						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
@@ -1237,7 +1238,7 @@
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 						
-					}
+					
 				}
 			} else {
 //D KEY
