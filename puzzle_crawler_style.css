@@ -73,7 +73,7 @@
 	
 	#status_container {
 		font-family:monospace;
-    text-align: center; 
+		text-align: center; 
 		font-size:200%;
 		margin:auto;
 		width:fit-content;
@@ -83,11 +83,9 @@
 	}
 	
 	#health_container {
-		display:inline;
 	}
 	
 	#cash_container {
-		display:inline;
 	}
 	
 	#f_tier {
@@ -161,16 +159,12 @@
 	}
 	
 	#cash_container {
-		display:inline;
 	}
 	
 	#atk_container {
-		display: inline;
 	}
 	#recovery_container {
-		display: inline;
 	}
 	
 	#floor_level {
-		display:inline;
 	}
