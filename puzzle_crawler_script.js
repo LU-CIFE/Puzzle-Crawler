@@ -1177,7 +1177,6 @@
 					document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 					
 					
-					document.getElementById("recovery_container").innerHTML = "Recovery: 0";
 					document.getElementById("cash_container").innerHTML = "Cash: 0";
 					document.getElementById("atk_container").innerHTML = "ATK: 1";
 					document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
