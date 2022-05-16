@@ -1177,6 +1177,7 @@
 					document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 					
 					
+					document.getElementById("recovery_container").innerHTML = "Recovery: 0";
 					document.getElementById("cash_container").innerHTML = "Cash: 0";
 					document.getElementById("atk_container").innerHTML = "ATK: 1";
 					document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
@@ -1230,6 +1231,7 @@
 							shake_effect("recovery_container");
 						}
 						
+						document.getElementById("recovery_container").innerHTML = "Recovery:: " + recovery;
 						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
