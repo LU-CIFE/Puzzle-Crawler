@@ -1168,7 +1168,7 @@
 					enemy3_health = 0;
 					enemy4_health = 0;
 					atk = 1;
-					recovery = 0;
+					recovery_amount = 0;
 					cash = 0;
 					new_floor();
 					pause_state = 0;
@@ -1232,7 +1232,7 @@
 							
 						}
 						
-						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
+						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
 						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
