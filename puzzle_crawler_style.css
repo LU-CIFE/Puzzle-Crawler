@@ -1,12 +1,14 @@
-#text_container {
+
+	
+	#text_container {
 		position: absolute;
 		margin-left: 2%;
 		border-style: solid;
 		height: 70%;
 		width: 12%;
 		font-family: Courier New;
-    text-align: center;
-}
+		text-align: center;
+	}
 	
 	#game_container {
 		margin-left: auto;
@@ -71,7 +73,7 @@
 	
 	#status_container {
 		font-family:monospace;
-		text-align:center;
+    text-align: justify; 
 		font-size:200%;
 		margin:auto;
 		width:fit-content;
@@ -81,7 +83,7 @@
 	}
 	
 	#health_container {
-		display: inline;
+		display:inline;
 	}
 	
 	#cash_container {
@@ -159,6 +161,7 @@
 	}
 	
 	#cash_container {
+		display:inline;
 	}
 	
 	#atk_container {
@@ -168,3 +171,6 @@
 		display: inline;
 	}
 	
+	#floor_level {
+		display:inline;
+	}
