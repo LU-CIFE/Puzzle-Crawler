@@ -83,11 +83,11 @@
 	}
 	
 	#health_container {
-		display:inline-flex;
+		display:inline-block;
 	}
 	
 	#cash_container {
-		display:inline-flex;
+		display:inline-block;
 	}
 	
 	#f_tier {
@@ -161,16 +161,16 @@
 	}
 	
 	#cash_container {
-		display:inline-flex;
+		display:inline-block;
 	}
 	
 	#atk_container {
-		display: inline-flex;
+		display: inline-block;
 	}
 	#recovery_container {
-		display: inline-flex;
+		display: inline-block;
 	}
 	
 	#floor_level {
-		display:inline-flex;
+		display:inline-block;
 	}
