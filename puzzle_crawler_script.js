@@ -1230,7 +1230,6 @@
 								recovery ++;
 								shake_effect("recovery_container");
 								shake_effect("cash_container");
-							}
 						}
 						
 						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
@@ -1238,7 +1237,7 @@
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 						
-					
+					}
 				}
 			} else {
 //D KEY
