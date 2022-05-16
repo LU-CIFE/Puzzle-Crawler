@@ -39,6 +39,8 @@ Hit `Esc` to resume.
 ## PRESTIGE
 
 > To be implemented.
+
+
 Hit `P` to enter the prestige menu.
 Use `W` & `S` to select a prestige option.
 Hit `Enter' to confirm.
