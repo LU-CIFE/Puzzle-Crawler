@@ -1233,7 +1233,7 @@
 							}
 						}
 						
-						document.getElementById("recovery_container").innerHTML = "Recovery:: " + recovery;
+						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
 						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
