@@ -1210,6 +1210,7 @@
 							if (cash - 1 >= 0) {
 								cash--;
 								atk ++;
+								document.getElementById("atk_container").innerHTML = "ATK: " + atk;
 								shake_effect("cash_container");
 								shake_effect("atk_container");
 							}
@@ -1219,6 +1220,7 @@
 							if (cash - 1 >= 0) {
 								cash--;
 								max_health ++;
+								document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 								shake_effect("cash_container");
 								shake_effect("health_container");
 							}
@@ -1226,15 +1228,13 @@
 							if (cash - 1 >= 0) {
 								cash --;
 								recovery_amount ++;
+								document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
 								shake_effect("cash_container");
 								shake_effect("recovery_container");
 							}
 							
 						}
 						
-						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
-						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
-						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 						
 					}
