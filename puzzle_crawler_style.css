@@ -81,6 +81,7 @@
 	}
 	
 	#health_container {
+		display: inline;
 	}
 	
 	#cash_container {
