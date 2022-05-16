@@ -1,4 +1,3 @@
-
 	//Passes variables between functions by initializing them outside.
 	
 	//HTML elements
