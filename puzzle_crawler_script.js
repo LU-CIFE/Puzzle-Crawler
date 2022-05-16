@@ -1209,7 +1209,7 @@
 					} else if (upgrade_state = 1) {
 	//first selection
 						if (cursor_pos == 32) {
-							if (cash >= 1) {
+							if (cash - 1 >= 0) {
 								cash--;
 								atk ++;
 								shake_effect("cash_container");
@@ -1218,18 +1218,19 @@
 							
 	//second selection
 						} else if (cursor_pos == 55) {
-							if (cash >= 1) {
+							if (cash - 1 >= 0) {
 								cash--;
 								max_health ++;
 								shake_effect("cash_container");
 								shake_effect("health_container");
 							}
 						} else if (cursor_pos == 78) {
-							if (cash >= 1) {
-								cash --;
+							if (cash - 1 >= 0) {
+								cash--;
 								recovery ++;
-								shake_effect("recovery_container");
 								shake_effect("cash_container");
+								shake_effect("recovery_container");
+							}
 						}
 						
 						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
