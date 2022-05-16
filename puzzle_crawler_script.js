@@ -1225,15 +1225,12 @@
 								shake_effect("health_container");
 							}
 						} else if (cursor_pos == 78) {
-							if (cash - 1 >= 0) {
-								cash--;
-								recovery ++;
-								shake_effect("cash_container");
-								shake_effect("recovery_container");
-							}
+							cash --;
+							recovery_amount ++;
+							shake_effect("cash_container");
+							shake_effect("recovery_container");
 						}
 						
-						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery;
 						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
 						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
