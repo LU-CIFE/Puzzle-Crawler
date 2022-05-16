@@ -73,7 +73,7 @@
 	
 	#status_container {
 		font-family:monospace;
-    text-align: justify; 
+    text-align: center; 
 		font-size:200%;
 		margin:auto;
 		width:fit-content;
@@ -82,6 +82,9 @@
 	#puzzle_crawler {
 	}
 	
+	#health_container {
+		display:inline;
+	}
 	
 	#cash_container {
 		display:inline;
