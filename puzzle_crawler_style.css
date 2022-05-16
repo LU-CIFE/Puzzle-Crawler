@@ -1,0 +1,169 @@
+#text_container {
+		position: absolute;
+		margin-left: 2%;
+		border-style: solid;
+		height: 70%;
+		width: 12%;
+		font-family: Courier New;
+    text-align: center;
+}
+	
+	#game_container {
+		margin-left: auto;
+		margin-right:auto;
+		margin-top: 5%;
+		width: fit-content;
+		height: fit-content;
+		border-style: solid;
+		font-size:175%;
+		overflow: hidden;
+		padding:3px;
+		padding-left:18px;
+		padding-bottom:18px;
+		padding-top:13px;
+		letter-spacing: 15px;
+		font-family:monospace;
+		
+	}
+	
+	#browser_warn {
+		position: absolute;
+		top: 1%;
+		font-family: Courier New;
+		
+	}
+	
+	body {
+		background-color: #1f1f1f;
+	}
+	
+	#sprite_p {
+		display: inline;
+		color: #ab20fd;
+	}
+	
+	#sprite_p_rotate {
+		display: inline-block;
+		color: #ab20fd;
+	}
+	
+	#title_text {
+		position: absolute;
+		left:0;
+		right:0;
+		width:500px;
+		margin-left: auto; 
+		margin-right: auto; 
+		text-align: center;
+		font-family: monospace;
+		font-size: 45;
+	}
+	
+	#text_container2 {
+		position: absolute;
+		right:2%;
+		border-style: solid;
+		height: 70%;
+		width: 12%;
+		font-family: Courier New;
+		text-align: center;
+	}
+	
+	#status_container {
+		font-family:monospace;
+		text-align:center;
+		font-size:200%;
+		margin:auto;
+		width:fit-content;
+	}
+	
+	#puzzle_crawler {
+	}
+	
+	#health_container {
+	}
+	
+	#cash_container {
+		display:inline;
+	}
+	
+	#f_tier {
+		color:white;
+		display:inline;
+	}
+	
+	#d_tier {
+		color:90EE90;
+		display:inline;
+	}
+	
+	#c_tier {
+		color:blue;
+		display:inline;
+	}
+	
+	#b_tier {
+		color:#ab20fd;
+		display:inline;
+	}
+	
+	#a_tier {
+		color:orange;
+		display:inline;
+	}
+	
+	#s_tier {
+		display:inline;
+	}
+	
+	audio {
+	display:none;
+	}
+	
+	#door_open {
+		display:inline;
+	}
+	
+	#highscore {
+		position:absolute;
+		font-family:monospace;
+		text-align:center;
+		font-size:200%;
+		margin:auto;
+		width:fit-content;
+		display:inline;
+		bottom:5%;
+		left: 5%;
+	}
+	
+	#rain_bow_1 {
+		display: inline;
+	}
+	
+	#user_alert {
+		position:absolute;
+		font-family:monospace;
+		text-align:center;
+		font-size:200%;
+		margin:auto;
+		width:fit-content;
+		display:inline;
+		bottom:5%;
+		right: 5%;
+	}
+	
+	#door_locked {
+		display: inline;
+		color:#C4A484;
+	}
+	
+	#cash_container {
+	}
+	
+	#atk_container {
+		display: inline;
+	}
+	#recovery_container {
+		display: inline;
+	}
+	
