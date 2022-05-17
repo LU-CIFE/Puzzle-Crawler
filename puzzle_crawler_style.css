@@ -339,3 +339,7 @@ audio {
 #floor_level {
 	display:inline-block;
 }
+
+a {
+	text-decoration:underline;
+}
