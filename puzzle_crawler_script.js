@@ -83,67 +83,56 @@ var enemy5_atk = 7;
 var selected_color = 0;
 
 window.onload = function() {
-	
+//sets page_color in an interval for when the player dies
 	page_color_data = setInterval(function() {
 		page_color_live = document.getElementById("puzzle_crawler").style.color;
 	}, 1);
 	
-	
+//see above comment
 	death_color_interval = setInterval(function() {
 		document.getElementById("game_container").style.color = page_color_live;
 		document.getElementById("health_container").style.color = page_color_live;
 	}, 1);
-	
-	if (highscore == null) {
-		highscore = 0;
-	}
-	
+//sets highscore if page never visited
+	if (highscore == null) {highscore = 0;}
 	document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
-	
+//pushes 22 empty spaces into an array and places a <br> at the end
 	for (i = 0; i < 22; i++) {
 		game_container_array_r1.push("&emsp14;");
 	}
-	//pushes 22 empty spaces into game_container_array_r1
-	//places a <br> at the end to call a new line
 	game_container_array_r1.push("<br>");
 	
-	//pushes 11 of those into another array
+//pushes 11 of those into another array
 	for (i = 0; i < row_amount; i++) {
 		table_data.push(game_container_array_r1);
 	}
 	
-	//flattens and joins the data
-	flattened_data = table_data.flat(10);
+//flattens and joins the data
+	flattened_data = table_data.flat();
 	
 	page_color();
 	
-	//Rainbow Cycling text
+//Rainbow Cycling text
 	color_interval = setInterval(function() {
-	//red calc
+//red calc
 	if (r == 255) {
-		//subtract blue if not empty yet
+//subtract blue if not empty yet
 		if (b != 0) {b--;}
-			
-		//if it is empty (red only) add green
+//if it is empty (red only) add green
 		else if (g != 255) { g++;}
-	//green calc
-	
+//green calc
 	} if (g == 255) {
-		//subtract red if not empty yet
+//subtract red if not empty yet
 		if (r != 0) {r--;}
-		
-			//if it is empty (green only) increase blue
+//if it is empty (green only) increase blue
 		 else if (b != 255) {b++;}
-	//blue calc
-	
+//blue calc
 	} if (b == 255) {
-		//subtract green if its not empty yet
+//subtract green if its not empty yet
 		if (g != 0) {g--;}
-		
-			//if it is empty (blue only) increase red
+//if it is empty (blue only) increase red
 		 else if (r != 255) {r++;}
 	}
-	
 	color_cycle = "rgb(" + r + ", " + g + ", " + b + ")";
 	
 	//place rainbow elements here!
@@ -151,8 +140,6 @@ window.onload = function() {
 	document.getElementById("title_big_text").style.color = color_cycle;
 	document.getElementById("s_tier").style.color = color_cycle;
 	document.getElementById("door_open").style.color = color_cycle;
-	
-	
 	},1);
 	
 	new_floor();
@@ -160,12 +147,10 @@ window.onload = function() {
 	
 	document.getElementById("title_tab").innerHTML= "Floor: " + current_floor;
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
-	
 } //onload bracket
 
-
 function page_color() {
-	
+//random page colors and color selection
 	if(random_color == 0) {
 		document.getElementById("puzzle_crawler").style.color = "#ab20fd";
 	} else if(random_color == 1) {
@@ -177,20 +162,17 @@ function page_color() {
 	} else if(random_color == 4) {
 		
 		if (selected_color == 4) {
-			
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
 		} else {
-	
-	//extra rare rainbow!
+//extra rare rainbow!
 			let rainbow_random = random_int(5);
 			if (rainbow_random == 0) {
 		
-			setInterval(function() { //needs an interval to work
+			setInterval(function() {//needs an interval to work
 			
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
 				document.getElementById("game_container").style.color = document.getElementById("puzzle_crawler").style.color;
 				document.getElementById("health_container").style.color = document.getElementById("puzzle_crawler").style.color;
-				
 			},1);
 			} else {
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
@@ -199,27 +181,17 @@ function page_color() {
 			}
 		}
 	} else if (random_color == 5) {
-	
 		selected_color_interval = setInterval(function() { //needs an interval to work
-			
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
-				
 		},1);
 	}
 }
 
-
-
 //Random World Gen (oh god)
 function generate_room(hall_value) {
 	
-	//To calculate array values of table_data
-	//find position on first row (0-22) 23 is <br>
-	//add n(23) to the first value where n is the row the point is located on.
-	
-	//0, 1, 2, 3, 4, 5
 	random_room_gen = random_int(6);
-	
+//Beutifully efficient
 	if (random_room_gen == 0) {
 		random_room_gen = 47;
 	} else if (random_room_gen == 1) {
@@ -233,9 +205,7 @@ function generate_room(hall_value) {
 	} else if (random_room_gen == 5) {
 		random_room_gen = 72;
 	}
-	//Beutifully efficient
 	
-	//USE SIX VALUES. CONVERT THEM TO 49, 50, 51, 72, 73, 74 BY RANDOM.
 	if (hall_value != 1) {
 	start_point = random_room_gen;
 		generate_first_normal_room();
@@ -249,22 +219,16 @@ function generate_room(hall_value) {
 		}
 	}
 	
-	
-	//Random room generation is finished, might add hallways, which is easy. maybe.
-	
 	room_state.push(room_point_array);
-	room_state.flat(10);
+	room_state.flat();
 	
-	//removes duped entries
+//removes duped entries
 	room_state.concat(room_state);
 	room_point_array.concat(room_point_array);
 	
 }
+
 function generate_first_normal_room() {
-	
-	//now we have our starting point, start_point.
-	//it stores the beginning/starting point for room generation, and is the basis of all calculation.
-	//it's possible values are 49, 50, 51, 72, 73, and 74.
 	
 	//Now we need to generate the room width, which is very easy. 
 	room_width_r1 = random_int(4);
@@ -272,18 +236,13 @@ function generate_first_normal_room() {
 	
 	width_end_point = start_point + room_width_r1;
 	
-	//We have width_end_point which is the second corner of the room. now we need the height.
 	//The room height is much more complex though.
-	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
-	
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
-	
 	corner_point = start_point + room_width_r1;
 	
 	recurse_fill = 0;
@@ -292,7 +251,8 @@ function generate_first_normal_room() {
 			room_point_array.push(i2 + recurse_fill);
 		}
 		recurse_fill += 23;
-	} //No clue why this works
+	}
+//No clue why this works
 	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
@@ -300,12 +260,7 @@ function generate_first_normal_room() {
 		return 0;
 	});
 
-
 }function generate_normal_room() {
-	
-	//now we have our starting point, start_point.
-	//it stores the beginning/starting point for room generation, and is the basis of all calculation.
-	//it's possible values are 49, 50, 51, 72, 73, and 74.
 	
 	//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
@@ -313,18 +268,13 @@ function generate_first_normal_room() {
 	
 	width_end_point = start_point + room_width_r1;
 	
-	//We have width_end_point which is the second corner of the room. now we need the height.
 	//The room height is much more complex though.
-	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
-	
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
-	
 	corner_point = start_point + room_width_r1;
 	
 	recurse_fill = 0;
@@ -333,7 +283,8 @@ function generate_first_normal_room() {
 			room_point_array.push(i2 + recurse_fill);
 		}
 		recurse_fill += 23;
-	} //No clue why this works
+	}
+//No clue why this works
 	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
@@ -343,35 +294,29 @@ function generate_first_normal_room() {
 	
 }
 
-
 function generate_upside_room() {
 	
-	//Now we need to generate the room width, which is very easy. 
+//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
 	
 	width_end_point = start_point + room_width;
 	
-	//We have width_end_point which is the second corner of the room. now we need the height.
-	//The room height is much more complex though.
-	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
-	
+//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-	
-	//Now we have kind of an upside down L shape, now it just needs to be filled in!
-	
-	
+//Now we have kind of an upside down L shape, now it just needs to be filled in!
 	recurse_fill = 0;
 	for (i = start_point; i <= height_end_point+1; i++) {
 		for (i2 = start_point; i2 <= width_end_point; i2++) {
 			room_point_array.push(i2 - recurse_fill);
 		}
 		recurse_fill += 23;
-	} //No clue why this works
+	}
+//No clue why this works
 	
 	room_point_array.sort(function(a,b) {
 		return b - a;
@@ -385,11 +330,10 @@ function generate_upside_room() {
 		if(a < b) return -1;
 		return 0;
 	});
-	
 }
 
 function generate_hall() {
-	//find right edges of room1
+//find right edges of room1
 	for (index = 0; index < room_point_array.length; index++) {
 		if (room_point_array[index] + 1 != room_point_array[index + 1]) {
 			room1_edges.push(room_point_array[index]);
@@ -403,7 +347,7 @@ function generate_hall() {
 		room_point_array.push(room1_edges[hall1_position] + i);
 	}
 	
-	//Why does .sort() not sort numerically but based off of UTF-8?
+//Why does .sort() not sort numerically but based off of UTF-8?
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
@@ -413,9 +357,8 @@ function generate_hall() {
 }
 
 //ELEMENT GENERATION
-
 function generate_player() {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	player_array_pos = random_int(7)
 	used_slots[0]= player_array_pos;
 	flattened_data[room_point_array[player_array_pos]] = "0";
@@ -427,16 +370,14 @@ function regenerate_player() {
 }
 
 function generate_door() {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	door_location = random_int(room_point_array.length);
 	
-	//prevents the door from spawning in the hall
-	
+//prevents the door from spawning in the hall
 	door_spawnable = 0;
 	 while (door_spawnable != 1) {
 		
-		
-		//regens if below and above are empty / inside hall
+//regens if below and above are empty / inside hall
 		if (flattened_data[room_point_array[door_location] - 23] == "&emsp14;") {
 			if (flattened_data[room_point_array[door_location] + 23] == "&emsp14;") {
 				door_location = random_int(room_point_array.length);
@@ -464,7 +405,7 @@ function generate_door() {
 		}
 	}
 	
-	//prevents door from spawning on player
+//prevents door from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -480,18 +421,15 @@ function generate_door() {
 		flattened_data[room_point_array[door_location]] = "<div id='door_locked'>#</div>";
 }
 
-
 function generate_enemy(enemy_tier) {
 
 	if (enemy_tier == 1) {
 		
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	enemy1_health = 4;
 	enemy1_location = random_int(room_point_array.length);
-	//prevents door from spawning on player
 	
-	
-	//prevents enemy1 from spawning on player
+//prevents enemy1 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -507,12 +445,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy1_location]] = "<div id='f_tier'>&</div>";
 		
 	} else if (enemy_tier == 2) {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	enemy2_health = 7;
 	enemy2_location = random_int(room_point_array.length);
 	
 	
-	//prevents enemy2 from spawning on player
+//prevents enemy2 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -530,11 +468,11 @@ function generate_enemy(enemy_tier) {
 		
 	} else if (enemy_tier == 3) {
 	
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	enemy3_health = 10;
 	enemy3_location = random_int(room_point_array.length);
 	
-	//prevents enemy3 from spawning on player
+//prevents enemy3 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -551,12 +489,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
 		
 	} else if (enemy_tier == 4) {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	enemy4_health = 12;
 	enemy4_location = random_int(room_point_array.length);
 	
 	
-	//prevents enemy4 from spawning on player
+//prevents enemy4 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -573,12 +511,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
 		
 	} else if (enemy_tier == 5) {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	enemy5_health = 17;
 	enemy5_location = random_int(room_point_array.length);
 	
 	
-	//prevents enemy5 from spawning on player
+//prevents enemy5 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -601,10 +539,10 @@ function generate_potion(potion_tier) {
 	
 	if (potion_tier == 1) {
 	
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	potion1_location = random_int(room_point_array.length);
 	
-	//prevents potion1 from spawning on player
+//prevents potion1 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -622,10 +560,10 @@ function generate_potion(potion_tier) {
 		
 	} else if (potion_tier == 2) {
 	
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	potion2_location = random_int(room_point_array.length);
 	
-	//prevents potion2 from spawning on player
+//prevents potion2 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -647,10 +585,10 @@ function generate_potion(potion_tier) {
 
 
 function generate_cash() {
-	//obtained a random position from the generated room
+//obtained a random position from the generated room
 	cash1_location = random_int(room_point_array.length);
 	
-	//prevents door from spawning on player
+//prevents door from spawning on player
 	for (i = 0; i <= used_slots.length; i++) {
 		if (cash1_location == used_slots[i]) {
 			cash1_location = random_int(room_point_array.length);
@@ -738,13 +676,13 @@ function new_floor() {
 	room1_edges = [];
 	
 	enemy1_health = 4;
-	//flattens and joins the data
-	flattened_data = table_data.flat(10);
+//flattens and joins the data
+	flattened_data = table_data.flat();
 	
 	generate_room();
 	generate_hall();
 	
-	//adds room data to flattened_data for printing
+//adds room data to flattened_data for printing
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = ".";
 	}
@@ -1125,8 +1063,7 @@ function logKey(e) {
 	if (keypress == "Escape") {
 		
 		upgrade_state = 0;
-		//23x11 including <br> at the end.the below values are the visible corners.
-		//MAKE SURE TO USE .SLICE FOR COPIES. ARRAYS ARE REFERENCES, NOT OBJECTS.
+//MAKE SURE TO USE .SLICE FOR COPIES. ARRAYS ARE REFERENCES, NOT OBJECTS.
 		if (health <= 0) {
 		} else if (pause_state == 0) {
 			
@@ -1150,16 +1087,14 @@ function logKey(e) {
 			sfx_pause2.play();
 			pause_state = 0;
 			
-			//restores session and player location
+//restores session and player location
 			flattened_data = save_state;
 			regenerate_player();
-			
 		}
 		
 		} else if (keypress == "Enter") {
 			
 			if (health <= 0) {
-			
 			
 			death_color_interval = setInterval(function() {
 				document.getElementById("game_container").style.color = page_color_live;
