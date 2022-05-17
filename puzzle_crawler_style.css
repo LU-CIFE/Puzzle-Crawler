@@ -343,3 +343,7 @@ audio {
 a {
 	text-decoration:underline;
 }
+
+a:visited {
+	text-decoration:underline;
+}
