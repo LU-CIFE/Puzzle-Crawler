@@ -1107,34 +1107,33 @@ function logKey(e) {
 				if (pause_state != 1) {
 					if (prestige_state == 0) {
 						if (upgrade_state == 0) {
+							
 							sfx_pause1.pause();
 							sfx_pause1.currentTime = 0;
 							sfx_pause1.play();
 							
 							save_state = flattened_data.slice(0);
 							
-							
 							for (index = 0; index < room_point_array.length; index++) {
 								flattened_data[room_point_array[index]] = "&emsp14;";
 							}
 							
-							draw_prestige_screen();
-							upgrade_state = 0;
-							prestige_state = 1;
+							draw_upgrade_screen();
+							upgrade_state = 1;
 							pause_state = 1;
 							draw_screen = 1;
+						} else {
+							upgrade_state = 0;
+							regenerate_player();
+							draw_screen = 1;
+							sfx_pause2.pause();
+							sfx_pause2.currentTime = 0;
+							sfx_pause2.play();
+							pause_state = 0;
 						}
-					} else {
-						prestige_state = 0;
-						upgrade_state = 0;
-						regenerate_player();
-						draw_screen = 1;
-						sfx_pause2.pause();
-						sfx_pause2.currentTime = 0;
-						sfx_pause2.play();
-						pause_state = 0;
 					}
 				}
+//P Key
 			}
 		}
 	if (draw_screen == 1) {
