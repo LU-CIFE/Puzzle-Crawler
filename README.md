@@ -1,7 +1,7 @@
 # Puzzle | Crawler
 ## A simple JS/HTML text-based game I made over the weekend.
 
-Game can be accessed publicly at `lu-cife.github.io/Puzzle-Crawler/`.
+Game can be accessed publicly at `lu-sife.github.io/Puzzle-Crawler/`.
 
 
 ### Puzzle-Crawler is a text-based, puzzle/dungeon-crawler game with some rogue-like elements.
