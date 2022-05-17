@@ -1119,11 +1119,12 @@ function logKey(e) {
 							}
 							
 							draw_prestige_screen();
-							upgrade_state = 1;
+							prestige_state = 1;
 							pause_state = 1;
 							draw_screen = 1;
 						} else {
 							upgrade_state = 0;
+							prestige_state = 0;
 							regenerate_player();
 							draw_screen = 1;
 							sfx_pause2.pause();
