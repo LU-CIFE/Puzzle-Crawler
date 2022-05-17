@@ -510,16 +510,15 @@
 			}
 		}
 		
-		
 		//prevents door from spawning on player
-		door_counter = 0;
-		while (door_counter != 1) {
+		generation_counter = 0;
+		while (generation_counter != 1) {
 			for (index = 0; index <= used_slots.length; index++) {
 				if (door_location == used_slots[index]) {
 					door_location = random_int(room_point_array.length);
-					door_counter = 0;
+					generation_counter = 0;
 				} else {
-					door_counter = 1;
+					generation_counter = 1;
 				}
 			}
 		}
@@ -536,9 +535,18 @@
 		enemy1_health = 4;
 		enemy1_location = random_int(room_point_array.length);
 		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy1_location == used_slots[i]) {
-				enemy1_location = random_int(room_point_array.length);
+		
+		
+		//prevents enemy1 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy1_location == used_slots[index]) {
+					enemy1_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
 			used_slots[2] = enemy1_location;
@@ -548,12 +556,21 @@
 		//obtained a random position from the generated room
 		enemy2_health = 7;
 		enemy2_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy2_location == used_slots[i]) {
-				enemy2_location = random_int(room_point_array.length);
+		
+		
+		//prevents enemy2 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy2_location == used_slots[index]) {
+					enemy2_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
+		
 			used_slots[5] = enemy2_location;
 			flattened_data[room_point_array[enemy2_location]] = "<div id='d_tier'>&</div>";
 			
@@ -562,12 +579,20 @@
 		//obtained a random position from the generated room
 		enemy3_health = 10;
 		enemy3_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy3_location == used_slots[i]) {
-				enemy3_location = random_int(room_point_array.length);
+		
+		//prevents enemy3 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy3_location == used_slots[index]) {
+					enemy3_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
+		
 			used_slots[6] = enemy3_location;
 			flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
 			
@@ -575,12 +600,21 @@
 		//obtained a random position from the generated room
 		enemy4_health = 12;
 		enemy4_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy4_location == used_slots[i]) {
-				enemy4_location = random_int(room_point_array.length);
+		
+		
+		//prevents enemy4 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy4_location == used_slots[index]) {
+					enemy4_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
+		
 			used_slots[7] = enemy4_location;
 			flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
 			
@@ -588,12 +622,21 @@
 		//obtained a random position from the generated room
 		enemy5_health = 17;
 		enemy5_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy5_location == used_slots[i]) {
-				enemy5_location = random_int(room_point_array.length);
+		
+		
+		//prevents enemy5 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy5_location == used_slots[index]) {
+					enemy5_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
+		
 			used_slots[8] = enemy5_location;
 			flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
 			
@@ -607,12 +650,19 @@
 		//obtained a random position from the generated room
 		potion1_location = random_int(room_point_array.length);
 		
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (potion1_location == used_slots[i]) {
-				potion1_location = random_int(room_point_array.length);
+		//prevents potion1 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (potion1_location == used_slots[index]) {
+					potion1_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
+		
 			used_slots[3] = potion1_location;
 			flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
 			
@@ -621,10 +671,16 @@
 		//obtained a random position from the generated room
 		potion2_location = random_int(room_point_array.length);
 		
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (potion2_location == used_slots[i]) {
-				potion2_location = random_int(room_point_array.length);
+		//prevents potion2 from spawning on player
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (potion2_location == used_slots[index]) {
+					potion2_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
 			used_slots[8] = potion2_location;
