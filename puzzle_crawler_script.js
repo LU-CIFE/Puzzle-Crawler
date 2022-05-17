@@ -694,26 +694,20 @@ function new_floor() {
 	if (current_floor >= 3) {
 		generate_enemy(2);
 	}
-	
 	if (current_floor >= 4) {
 		generate_enemy(3);
 	}
-	
 	if (current_floor >= 5) {
 			generate_potion(2);
 	}
-	
 	if (current_floor >= 6) {
 		generate_enemy(4);
 	}
-	
 	if (current_floor >= 8) {
 		generate_enemy(5);
 	}
-	
 	generate_potion(1);
 	generate_cash();
-	
 	current_floor ++;
 	
 	if (current_floor >= highscore) {
@@ -777,36 +771,7 @@ function check_tile() {
 		}
 		enemy1_health -= atk;
 		if (health <= 0) {
-			
-		document.getElementById("game_container").style.color = "red";
-		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
-			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
-			
-			save_state = flattened_data.slice(0);
-			
-			for (index = 0; index < room_point_array.length; index++) {
-				flattened_data[room_point_array[index]] = "&emsp14;";
-			}
-			
-			clearInterval(death_color_interval);
-			pause_state = 1;
-			death_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
-			draw_death_screen();
-			
-			
-			if (current_floor >= highscore) {
-				highscore = current_floor;
-			}
-			localStorage.setItem('highscore_stored', current_floor);
-			
-			current_floor = 0;
-			
-			draw_screen = 1;
+			player_death();
 		} else if (enemy1_health <= 0) {
 			
 			enemy_random_drop = random_int(3);
@@ -831,35 +796,7 @@ function check_tile() {
 		}
 		enemy2_health -= atk;
 		if (health <= 0) {
-			
-		document.getElementById("game_container").style.color = "red";
-		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
-			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
-			
-			save_state = flattened_data.slice(0);
-			
-			for (index = 0; index < room_point_array.length; index++) {
-				flattened_data[room_point_array[index]] = "&emsp14;";
-			}
-			
-			clearInterval(death_color_interval);
-			pause_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
-			draw_death_screen();
-			
-			
-			if (current_floor >= highscore) {
-				highscore = current_floor;
-			}
-			localStorage.setItem('highscore_stored', current_floor);
-			
-			current_floor = 0;
-			
-			draw_screen = 1;
+			player_death();
 		} else if (enemy2_health <= 0) {
 			
 			enemy_random_drop = random_int(3);
@@ -884,35 +821,7 @@ function check_tile() {
 		}
 		enemy3_health -= atk;
 		if (health <= 0) {
-			
-		document.getElementById("game_container").style.color = "red";
-		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
-			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
-			
-			save_state = flattened_data.slice(0);
-			
-			for (index = 0; index < room_point_array.length; index++) {
-				flattened_data[room_point_array[index]] = "&emsp14;";
-			}
-			
-			clearInterval(death_color_interval);
-			pause_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
-			draw_death_screen();
-			
-			
-			if (current_floor >= highscore) {
-				highscore = current_floor;
-			}
-			localStorage.setItem('highscore_stored', current_floor);
-			
-			current_floor = 0;
-			
-			draw_screen = 1;
+			player_death();
 		} else if (enemy3_health <= 0) {
 			
 			enemy_random_drop = random_int(2);
@@ -937,35 +846,7 @@ function check_tile() {
 		}
 		enemy4_health -= atk;
 		if (health <= 0) {
-			
-		document.getElementById("game_container").style.color = "red";
-		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
-			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
-			
-			save_state = flattened_data.slice(0);
-			
-			for (index = 0; index < room_point_array.length; index++) {
-				flattened_data[room_point_array[index]] = "&emsp14;";
-			}
-			
-			clearInterval(death_color_interval);
-			pause_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
-			draw_death_screen();
-			
-			
-			if (current_floor >= highscore) {
-				highscore = current_floor;
-			}
-			localStorage.setItem('highscore_stored', current_floor);
-			
-			current_floor = 0;
-			
-			draw_screen = 1;
+			player_death();
 		} else if (enemy4_health <= 0) {
 			
 			enemy_random_drop = random_int(3);
@@ -990,35 +871,7 @@ function check_tile() {
 		}
 		enemy5_health -= atk;
 		if (health <= 0) {
-			
-		document.getElementById("game_container").style.color = "red";
-		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
-			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
-			
-			save_state = flattened_data.slice(0);
-			
-			for (index = 0; index < room_point_array.length; index++) {
-				flattened_data[room_point_array[index]] = "&emsp14;";
-			}
-			
-			clearInterval(death_color_interval);
-			pause_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
-			draw_death_screen();
-			
-			
-			if (current_floor >= highscore) {
-				highscore = current_floor;
-			}
-			localStorage.setItem('highscore_stored', current_floor);
-			
-			current_floor = 0;
-			
-			draw_screen = 1;
+			player_death();
 		} else if (enemy5_health <= 0) {
 			
 			enemy_random_drop = random_int(3);
@@ -1052,6 +905,35 @@ function move_player () {
 	flattened_data[room_point_array[player_array_pos]] = ".";
 	player_array_pos = room_point_array.indexOf(room_point_array[player_array_pos] + player_direction);
 	regenerate_player();
+}
+
+function player_death() {
+		document.getElementById("game_container").style.color = "red";
+		document.getElementById("health_container").style.color = "red";
+		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+			
+			sfx_kill1.pause();
+			sfx_kill1.currentTime = 0;
+			sfx_kill1.play();
+			
+			save_state = flattened_data.slice(0);
+			
+			for (index = 0; index < room_point_array.length; index++) {
+				flattened_data[room_point_array[index]] = "&emsp14;";
+			}
+			
+			clearInterval(death_color_interval);
+			pause_state = 1;
+			death_state = 1;
+			document.getElementById("title_tab").innerHTML= "You Died!";
+			draw_death_screen();
+			
+			if (current_floor >= highscore) {
+				highscore = current_floor;
+			}
+			localStorage.setItem('highscore_stored', current_floor);
+			current_floor = 0;
+			draw_screen = 1;
 }
 
 const log = document.getElementById('game_container');
