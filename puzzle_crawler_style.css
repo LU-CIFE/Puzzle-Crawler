@@ -78,8 +78,6 @@ body {
 #health_container {
 	display:inline-block;
 }
-
-<<<<<<< Updated upstream
 	
 	#text_container {
 		position: absolute;
@@ -140,6 +138,11 @@ body {
 		text-align: center;
 		font-family: monospace;
 		font-size: 45;
+	}
+	
+	#title_big_text {
+		overflow:hidden;
+		white-space:nowrap;
 	}
 	
 	#text_container2 {
@@ -344,4 +347,3 @@ audio {
 #floor_level {
 	display:inline-block;
 }
->>>>>>> Stashed changes
