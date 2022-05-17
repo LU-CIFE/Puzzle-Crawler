@@ -168,16 +168,21 @@ function page_color() {
 //random page colors and color selection
 	if(random_color == 0) {
 		document.getElementById("puzzle_crawler").style.color = "#ab20fd";
+		document.getElementById("link_text").style.color = "#ab20fd";
 	} else if(random_color == 1) {
 		document.getElementById("puzzle_crawler").style.color = "orange";
+		document.getElementById("link_text").style.color = "orange";
 	} else if(random_color == 2) {
 		document.getElementById("puzzle_crawler").style.color = "#39FF14";
+		document.getElementById("link_text").style.color = "#a39FF14";
 	} else if(random_color == 3) {
 		document.getElementById("puzzle_crawler").style.color = "white";
+		document.getElementById("link_text").style.color = "white";
 	} else if(random_color == 4) {
 		
 		if (selected_color == 4) {
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
+		document.getElementById("link_text").style.color = "#e65c9b";
 		} else {
 //extra rare rainbow!
 			let rainbow_random = random_int(5);
@@ -186,10 +191,12 @@ function page_color() {
 			setInterval(function() {//needs an interval to work
 			
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
+				document.getElementById("link_text").style.color = color_cycle;
 				document.getElementById("game_container").style.color = document.getElementById("puzzle_crawler").style.color;
 				document.getElementById("health_container").style.color = document.getElementById("puzzle_crawler").style.color;
 			},1);
 			} else {
+				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
 				document.getElementById("game_container").style.color = "#e65c9b";
 				document.getElementById("health_container").style.color = "#e65c9b";
@@ -198,6 +205,7 @@ function page_color() {
 	} else if (random_color == 5) {
 		selected_color_interval = setInterval(function() { //needs an interval to work
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
+				document.getElementById("link_text").style.color = color_cycle;
 		},1);
 	}
 }
