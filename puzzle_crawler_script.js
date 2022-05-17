@@ -65,6 +65,12 @@ var max_health = 3;
 var health = 3;
 var cash = 0;
 var atk = 1;
+var prest_recovery = localStorage.getItem('recovery_stored');
+var prest_max_health = localStorage.getItem('max_health_stored');
+var prest_atk = localStorage.getItem('atk_stored');
+var total_max_health = 0;
+var total_atk = 0;
+var total_recovery = 0;
 
 //enemy variables
 var enemy1_health = 4;
@@ -94,8 +100,16 @@ window.onload = function() {
 		document.getElementById("game_container").style.color = page_color_live;
 		document.getElementById("health_container").style.color = page_color_live;
 	}, 1);
-//sets highscore if page never visited
+//sets variables if page never visited
 	if (highscore == null) {highscore = 0;}
+	if (prest_atk == null) {prest_atk = 0;}
+	if (prest_max_health == null) {prest_max_health = 0;}
+	if (prest_recovery == null) {prest_recovery = 0;}
+	
+	total_atk = atk + prest_atk;
+	total_max_health = max_health + prest_max_health;
+	total_recovery = recovery_amount + prest_recovery;
+	
 	document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
 //pushes 22 empty spaces into an array and places a <br> at the end
 	for (i = 0; i < 22; i++) {
@@ -735,24 +749,24 @@ function check_tile() {
 		document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>Q</div>") {
-		health += 3 + recovery_amount;
+		health += 3 + total_recovery;
 		
-		if (health > max_health) {
-			health = max_health;
+		if (health > total_max_health) {
+			health = total_max_health;
 		}
 		
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 		play_random_walk();
 		move_player();
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>Q</div>") {
-		health += 5 + recovery_amount;
+		health += 5 + total_recovery;
 		
-		if (health > max_health) {
-			health = max_health;
+		if (health > total_max_health) {
+			health = total_max_health;
 		}
 		
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 		play_random_walk();
 		move_player();
@@ -762,7 +776,7 @@ function check_tile() {
 			shake_effect("health_container");
 			health -= enemy1_atk;
 		}
-		enemy1_health -= atk;
+		enemy1_health -= (total_atk);
 		if (health <= 0) {
 			player_death();
 		} else if (enemy1_health <= 0) {
@@ -772,7 +786,7 @@ function check_tile() {
 		sfx_hit1.pause();
 		sfx_hit1.currentTime = 0;
 		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>&</div>") {
 		
@@ -780,7 +794,7 @@ function check_tile() {
 			shake_effect("health_container");
 			health -= enemy2_atk;
 		}
-		enemy2_health -= atk;
+		enemy2_health -= (total_atk);
 		if (health <= 0) {
 			player_death();
 		} else if (enemy2_health <= 0) {
@@ -790,7 +804,7 @@ function check_tile() {
 		sfx_hit1.pause();
 		sfx_hit1.currentTime = 0;
 		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='c_tier'>&</div>") {
 		
@@ -798,7 +812,7 @@ function check_tile() {
 			shake_effect("health_container");
 			health -= enemy3_atk;
 		}
-		enemy3_health -= atk;
+		enemy3_health -= (total_atk);
 		if (health <= 0) {
 			player_death();
 		} else if (enemy3_health <= 0) {
@@ -808,7 +822,7 @@ function check_tile() {
 		sfx_hit1.pause();
 		sfx_hit1.currentTime = 0;
 		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='b_tier'>&</div>") {
 		
@@ -816,7 +830,7 @@ function check_tile() {
 			shake_effect("health_container");
 			health -= enemy4_atk;
 		}
-		enemy4_health -= atk;
+		enemy4_health -= (total_atk);
 		if (health <= 0) {
 			player_death();
 		} else if (enemy4_health <= 0) {
@@ -826,7 +840,7 @@ function check_tile() {
 		sfx_hit1.pause();
 		sfx_hit1.currentTime = 0;
 		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='a_tier'>&</div>") {
 		
@@ -834,7 +848,7 @@ function check_tile() {
 			shake_effect("health_container");
 			health -= enemy5_atk;
 		}
-		enemy5_health -= atk;
+		enemy5_health -= (total_atk);
 		if (health <= 0) {
 			player_death();
 		} else if (enemy5_health <= 0) {
@@ -844,7 +858,7 @@ function check_tile() {
 		sfx_hit1.pause();
 		sfx_hit1.currentTime = 0;
 		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>$</div>") {
 		cash ++;
@@ -868,7 +882,7 @@ function move_player () {
 function player_death() {
 		document.getElementById("game_container").style.color = "red";
 		document.getElementById("health_container").style.color = "red";
-		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+		document.getElementById("health_container").innerHTML = "Health: 0/" + total_max_health;
 			
 			sfx_kill1.pause();
 			sfx_kill1.currentTime = 0;
@@ -981,32 +995,36 @@ function logKey(e) {
 				death_state = 0;
 				document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 				
-				
+				total_atk = atk + prest_atk;
+				total_max_health = max_health + prest_max_health;
+				total_recovery = recovery_amount + prest_recovery;
 				document.getElementById("cash_container").innerHTML = "Cash: 0";
-				document.getElementById("atk_container").innerHTML = "ATK: 1";
-				document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+				document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
+				document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 				document.getElementById("game_container").innerHTML = flattened_data.join("");
 				
 			} else if (pause_state == 1) {
 //pause screen select
 				if (upgrade_state != 1) {
-					if (cursor_pos == 32) {
-						if (selected_color == 5) {
-							clearInterval(selected_color_interval);
+					if (prestige_state != 1) {
+						if (cursor_pos == 32) {
+							if (selected_color == 5) {
+								clearInterval(selected_color_interval);
+							}
+							selected_color += 1;
+							if (selected_color == 6) {
+								selected_color = 0;
+							}
+							random_color = selected_color;
+							page_color();
+						} else if (cursor_pos == 55) {
+							current_floor = 0;
+							health = total_max_health;
+							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
+							new_floor();
+							pause_state = 0;
+							draw_screen = 1;
 						}
-						selected_color += 1;
-						if (selected_color == 6) {
-							selected_color = 0;
-						}
-						random_color = selected_color;
-						page_color();
-					} else if (cursor_pos == 55) {
-						current_floor = 0;
-						health = max_health;
-						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-						new_floor();
-						pause_state = 0;
-						draw_screen = 1;
 					}
 					
 //upgrade screen select
@@ -1016,7 +1034,8 @@ function logKey(e) {
 						if (cash - 1 >= 0) {
 							cash--;
 							atk ++;
-							document.getElementById("atk_container").innerHTML = "ATK: " + atk;
+							total_atk = atk + prest_atk;
+							document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
 							shake_effect("cash_container");
 							shake_effect("atk_container");
 						}
@@ -1026,7 +1045,8 @@ function logKey(e) {
 						if (cash - 1 >= 0) {
 							cash--;
 							max_health ++;
-							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+							total_max_health = max_health + prest_max_health;
+							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 							shake_effect("cash_container");
 							shake_effect("health_container");
 						}
@@ -1034,7 +1054,8 @@ function logKey(e) {
 						if (cash - 1 >= 0) {
 							cash --;
 							recovery_amount ++;
-							document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
+							total_recovery = recovery_amount + prest_recovery;
+							document.getElementById("recovery_container").innerHTML = "Recovery: " + total_recovery;
 							shake_effect("cash_container");
 							shake_effect("recovery_container");
 						}
@@ -1042,7 +1063,43 @@ function logKey(e) {
 					}
 					
 					document.getElementById("cash_container").innerHTML = "Cash: " + cash;
-					
+//prestige slection
+				} else if (prestige_state == 1) {
+//first selection
+					if (cursor_pos == 32) {
+						if (cash - 1 >= 0) {
+							cash--;
+							prest_atk ++;
+							total_atk = atk + prest_atk;
+							localStorage.setItem('atk_stored', prest_atk);
+							document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
+							shake_effect("cash_container");
+							shake_effect("atk_container");
+						}
+						
+//second selection
+					} else if (cursor_pos == 55) {
+						if (cash - 1 >= 0) {
+							cash--;
+							prest_max_health ++;
+							total_max_health = max_health + prest_max_health;
+							localStorage.setItem('max_health_stored', prest_max_health);
+							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
+							shake_effect("cash_container");
+							shake_effect("health_container");
+						}
+					} else if (cursor_pos == 78) {
+						if (cash - 1 >= 0) {
+							cash --;
+							prest_recovery ++;
+							total_recovery = recovery_amount + prest_recovery;
+							localStorage.setItem('reoovery_stored', prest_recovery);
+							document.getElementById("recovery_container").innerHTML = "Recovery: " + total_recovery;
+							shake_effect("cash_container");
+							shake_effect("recovery_container");
+						}
+					}
+					document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 				}
 			}
 		} else {
