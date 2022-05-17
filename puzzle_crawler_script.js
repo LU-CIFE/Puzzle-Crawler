@@ -182,7 +182,7 @@ function page_color() {
 		
 		if (selected_color == 4) {
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
-		document.getElementById("link_text").style.color = "#e65c9b";
+				document.getElementById("link_text").style.color = "#e65c9b";
 		} else {
 //extra rare rainbow!
 			let rainbow_random = random_int(5);
@@ -197,7 +197,7 @@ function page_color() {
 			},1);
 			} else {
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
-				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
+				document.getElementById("link_text").style.color = "#e65c9b";
 				document.getElementById("game_container").style.color = "#e65c9b";
 				document.getElementById("health_container").style.color = "#e65c9b";
 			}
