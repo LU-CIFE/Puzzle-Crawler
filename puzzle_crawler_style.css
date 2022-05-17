@@ -35,15 +35,7 @@ body {
 	background-color: #1f1f1f;
 }
 
-#sprite_p {
-	display: inline;
-	color: #ab20fd;
-}
 
-#sprite_p_rotate {
-	display: inline-block;
-	color: #ab20fd;
-}
 
 #title_text {
 	position: absolute;
