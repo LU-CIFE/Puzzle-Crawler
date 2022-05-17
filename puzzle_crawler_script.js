@@ -34,6 +34,7 @@ var pause_state = 0;
 var draw_screen = 0;
 var upgrade_state = 0;
 var death_state = 0;
+var prestige_state = 0;
 
 //room generation
 const row_amount = 11;
@@ -838,6 +839,8 @@ function logKey(e) {
 			pause_state = 1;
 			draw_screen = 1;
 		} else {
+			upgrade_state = 0;
+			prestige_state = 0;
 			draw_screen = 1;
 			play_sfx_pause2();
 			pause_state = 0;
@@ -978,8 +981,35 @@ function logKey(e) {
 					pause_state = 0;
 				}
 			}
+//P KEY
+		} else if (keypress == "Keyp") {
+			if (pause_state != 1) {
+				if (upgrade_state == 0) {
+					if (prestige_state == 0) {
+						
+						play_sfx_1();
+						save_state = flattened_data.slice(0);
+						
+						for (index = 0; index < room_point_array.length; index++) {
+							flattened_data[room_point_array[index]] = "&emsp14;";
+						}
+						
+						draw_prestige_screen();
+						upprestige_state = 1;
+						pause_state = 1;
+						draw_screen = 1;
+					} else {
+						prestige_state = 0;
+						regenerate_player();
+						draw_screen = 1;
+						sfx_pause2.pause();
+						sfx_pause2.currentTime = 0;
+						sfx_pause2.play();
+						pause_state = 0;
+					}
+				}
+			}
 		}
-	}
 	if (draw_screen == 1) {
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
 		draw_screen = 0;
@@ -1121,6 +1151,36 @@ function draw_upgrade_screen() {
 	
 	let paused_array = ["U", "P", "G", "R", "A", "D", "E"];
 	for (i = 0; i <= 6; i++) {
+		flattened_data[i + 24] = paused_array[i];
+	}
+	
+	let paused_array_set1 = ["A", "T", "K", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "+", "1"];
+	for (i = 0; i <= 10; i++) {
+		flattened_data[i + 33] = paused_array_set1[i];
+	}
+	
+	let paused_array_set2 = ["H", "E", "A", "L", "T", "H", "&emsp14;", "&emsp14;", "&emsp14;", "+", "1"];
+	for (i = 0; i <= 10; i++) {
+		flattened_data[i + 56] = paused_array_set2[i];
+	}
+	
+	let paused_array_set3 = ["R", "E", "C", "O", "V", "E", "R", "Y", "&emsp14;", "+", "1"];
+	for (i = 0; i <= 10; i++) {
+		flattened_data[i + 79] = paused_array_set3[i];
+	}
+}
+function draw_prestige_screen() {
+	for (index = 0; index < room_point_array.length; index++) {
+		flattened_data[room_point_array[index]] = "&emsp14;";
+	}
+	cursor_pos = 32;
+	prev_cursor = 32;
+	corner_signs();
+	
+	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
+	
+	let paused_array = ["P", "R", "E", "S", "T", "I", "G", "E"];
+	for (i = 0; i <= 7; i++) {
 		flattened_data[i + 24] = paused_array[i];
 	}
 	
