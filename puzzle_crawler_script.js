@@ -901,8 +901,8 @@ function logKey(e) {
 						if (cash - 1 >= 0) {
 							cash--;
 							prest_atk ++;
-							total_atk = atk + prest_atk;
 							localStorage.setItem('atk_stored', prest_atk);
+							total_atk = atk + prest_atk;
 							document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
 							shake_effect("cash_container");
 							shake_effect("atk_container");
