@@ -192,18 +192,10 @@ function generate_room(hall_value) {
 	
 	random_room_gen = random_int(6);
 //Beutifully efficient
-	if (random_room_gen == 0) {
-		random_room_gen = 47;
-	} else if (random_room_gen == 1) {
-		random_room_gen = 48;
-	} else if (random_room_gen == 2) {
-		random_room_gen = 49;
-	} else if (random_room_gen == 3) {
-		random_room_gen = 70;
-	} else if (random_room_gen == 4) {
-		random_room_gen = 71;
-	} else if (random_room_gen == 5) {
-		random_room_gen = 72;
+	if (random_room_gen <= 2) {
+		random_room_gen += 47;
+	} else {
+		random_room_gen += 67;
 	}
 	
 	if (hall_value != 1) {
@@ -1178,6 +1170,13 @@ function play_random_walk() {
 	}
 }
 
+function corner_signs() {
+	flattened_data[0] = '<div id="sprite_p">$</div>';
+	flattened_data[21] = '<div id="sprite_p">$</div>';
+	flattened_data[230] = '<div id="sprite_p">$</div>';
+	flattened_data[251] = '<div id="sprite_p">$</div>';
+}
+
 function draw_pause_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
@@ -1185,11 +1184,7 @@ function draw_pause_screen() {
 	cursor_pos = 32;
 	prev_cursor = 32;
 	
-	
-	flattened_data[0] = '<div id="sprite_p">$</div>';
-	flattened_data[21] = '<div id="sprite_p">$</div>';
-	flattened_data[230] = '<div id="sprite_p">$</div>';
-	flattened_data[251] = '<div id="sprite_p">$</div>';
+	corner_signs();
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
@@ -1219,11 +1214,8 @@ function draw_death_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
 	}
-	flattened_data[0] = '<div id="sprite_p">$</div>';
-	flattened_data[21] = '<div id="sprite_p">$</div>';
-	flattened_data[230] = '<div id="sprite_p">$</div>';
-	flattened_data[251] = '<div id="sprite_p">$</div>';
 	
+	corner_signs();
 	
 	//arrays shorten the amount of times i have to type flattened_data
 	let death_array = ["Y", "O", "U", "&emsp14;", "D", "I", "E", "D"];
@@ -1246,11 +1238,7 @@ function draw_upgrade_screen() {
 	cursor_pos = 32;
 	prev_cursor = 32;
 	
-	
-	flattened_data[0] = '<div id="sprite_p">$</div>';
-	flattened_data[21] = '<div id="sprite_p">$</div>';
-	flattened_data[230] = '<div id="sprite_p">$</div>';
-	flattened_data[251] = '<div id="sprite_p">$</div>';
+	corner_signs();
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
