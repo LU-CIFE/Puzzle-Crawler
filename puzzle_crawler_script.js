@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-
-	//Passes variables between functions by initializing them outside.
-	
-	//HTML elements
-	var game_container = document.getElementById('game_container');
-=======
 //HTML elements
 var game_container = document.getElementById('game_container');
+var page_color_live = document.getElementById("puzzle_crawler").style.color;
+var highscore = localStorage.getItem('highscore_stored');
 var sfx_pause1 = document.getElementById("sfx_1");
 var sfx_pause2 = document.getElementById("sfx_2");
 var sfx_kill1 = document.getElementById("sfx_3");
@@ -25,25 +20,7 @@ var save_state = [];
 var start_point = [];
 var room_point_array = [];
 var room_state = [];
-var room1_edges = [];
 var used_slots = [];
-
-//world gen parameters
-let row_amount = 11;
-var random_gen_array = 0;
-var room_width = 0;
-var random_room_gen = 0;
-var width_end_point = 0;
-var room_height = 0;
-var hall1_length = 0;
-var room_width_r1 = 0;
-var height_end_point = 0;
-var corner_point = 0;
-var room_width_end_point = 0;
-var random_gen_row = 0;
-var random_gen_col = 0;
-var recurse_fill = 0;
-var room_build_check = 0;
 
 //Color parameters
 var random_color = random_int(5);
@@ -51,25 +28,42 @@ var r = 255;
 var g = 0;
 var b = 255;
 var color_cycle = "";
-var page_color_live = document.getElementById("puzzle_crawler").style.color;
 
 //gamestates
 var pause_state = 0;
-draw_screen = 0;
-var current_floor = 0;
+var draw_screen = 0;
+var upgrade_state = 0;
+var death_state = 0;
+
+//room generation
+const row_amount = 11;
+var random_gen_row = 0;
+var random_gen_col = 0;
+var random_gen_array = 0;
+var room_width = 0;
+var width_end_point = 0;
+var room_height = 0;
+var height_end_point = 0;
+var corner_point = 0;
+var room_width_end_point = 0;
+var recurse_fill = 0;
+var room_build_check = 0;
+var random_room_gen = 0;
+var room1_edges = [];
+var hall1_length = 0;
+var room_width_r1 = 0;
+var door_spawnable = 0;
 
 //player variables
+var player_direction = 0;
 var player_array_pos = 0;
 var prev_player_pos = 0;
-var player_direction = 0;
+var current_floor = 0;
+var recovery_amount = 0;
 var max_health = 3;
 var health = 3;
 var cash = 0;
 var atk = 1;
-var recovery_amount = 0;
-
-//door variables
-var door_spawnable = 0;
 
 //enemy variables
 var enemy1_health = 4;
@@ -77,78 +71,76 @@ var enemy2_health = 0;
 var enemy3_health = 0;
 var enemy4_health = 0;
 var enemy5_health = 0;
+
 var enemy1_atk = 1;
 var enemy2_atk = 2;
 var enemy3_atk = 4;
 var enemy4_atk = 5;
 var enemy5_atk = 7;
 
-//settings variables
-var curser_pos = 32;
-var prev_cursor = 32;
-var selected_color = 0;
-var upgrade_state = 0;
-var death_state = 0;
-var highscore = localStorage.getItem('highscore_stored');;
 
+//misc
+var selected_color = 0;
 
 window.onload = function() {
-//constantly sets a color interval for when the user wants to change colors
+	
 	page_color_data = setInterval(function() {
 		page_color_live = document.getElementById("puzzle_crawler").style.color;
 	}, 1);
 	
-//resets the rainbow color upon death.
+	
 	death_color_interval = setInterval(function() {
 		document.getElementById("game_container").style.color = page_color_live;
 		document.getElementById("health_container").style.color = page_color_live;
 	}, 1);
-
-//sets highscore if page has never been visited
-	if (highscore == null) { highscore = 0; }
-	document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
->>>>>>> Stashed changes
 	
-//fills an array w/ 22 empty spaces and places a line break at the end.
+	if (highscore == null) {
+		highscore = 0;
+	}
+	
+	document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
+	
 	for (i = 0; i < 22; i++) {
 		game_container_array_r1.push("&emsp14;");
 	}
+	//pushes 22 empty spaces into game_container_array_r1
+	//places a <br> at the end to call a new line
 	game_container_array_r1.push("<br>");
 	
-//pushes 11 of those into another array
+	//pushes 11 of those into another array
 	for (i = 0; i < row_amount; i++) {
 		table_data.push(game_container_array_r1);
 	}
 	
-//flattens and joins the data
-	flattened_data = table_data.flat();
+	//flattens and joins the data
+	flattened_data = table_data.flat(10);
 	
 	page_color();
 	
-//Rainbow Cycling text
+	//Rainbow Cycling text
 	color_interval = setInterval(function() {
-//red calc
+	//red calc
 	if (r == 255) {
-//subtract blue if not empty yet
+		//subtract blue if not empty yet
 		if (b != 0) {b--;}
 			
-//if it is empty (red only) add green
+		//if it is empty (red only) add green
 		else if (g != 255) { g++;}
-//green calc
+	//green calc
 	
 	} if (g == 255) {
-//subtract red if not empty yet
+		//subtract red if not empty yet
 		if (r != 0) {r--;}
 		
-//if it is empty (green only) increase blue
+			//if it is empty (green only) increase blue
 		 else if (b != 255) {b++;}
-//blue calc
+	//blue calc
 	
 	} if (b == 255) {
-//subtract green if its not empty yet
+		//subtract green if its not empty yet
 		if (g != 0) {g--;}
 		
-//if it is empty (blue only) increase red
+			//if it is empty (blue only) increase red
 		 else if (r != 255) {r++;}
 	}
 	
@@ -159,6 +151,8 @@ window.onload = function() {
 	document.getElementById("title_big_text").style.color = color_cycle;
 	document.getElementById("s_tier").style.color = color_cycle;
 	document.getElementById("door_open").style.color = color_cycle;
+	
+	
 	},1);
 	
 	new_floor();
@@ -172,7 +166,6 @@ window.onload = function() {
 
 function page_color() {
 	
-//generates a random page color on load
 	if(random_color == 0) {
 		document.getElementById("puzzle_crawler").style.color = "#ab20fd";
 	} else if(random_color == 1) {
@@ -183,8 +176,8 @@ function page_color() {
 		document.getElementById("puzzle_crawler").style.color = "white";
 	} else if(random_color == 4) {
 		
-//neccessary for color selection
 		if (selected_color == 4) {
+			
 				document.getElementById("puzzle_crawler").style.color = "#e65c9b";
 		} else {
 	
@@ -208,22 +201,25 @@ function page_color() {
 	} else if (random_color == 5) {
 	
 		selected_color_interval = setInterval(function() { //needs an interval to work
+			
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
+				
 		},1);
 	}
 }
 
+
+
 //Random World Gen (oh god)
 function generate_room(hall_value) {
 	
-//To calculate array values of table_data
-//find position on first row (0-22) 23 is <br>
-//add n(23) to the first value where n is the row the point is located on.
+	//To calculate array values of table_data
+	//find position on first row (0-22) 23 is <br>
+	//add n(23) to the first value where n is the row the point is located on.
 	
-//0, 1, 2, 3, 4, 5
+	//0, 1, 2, 3, 4, 5
 	random_room_gen = random_int(6);
 	
-//Beutifully efficient
 	if (random_room_gen == 0) {
 		random_room_gen = 47;
 	} else if (random_room_gen == 1) {
@@ -237,12 +233,13 @@ function generate_room(hall_value) {
 	} else if (random_room_gen == 5) {
 		random_room_gen = 72;
 	}
+	//Beutifully efficient
 	
+	//USE SIX VALUES. CONVERT THEM TO 49, 50, 51, 72, 73, 74 BY RANDOM.
 	if (hall_value != 1) {
 	start_point = random_room_gen;
 		generate_first_normal_room();
 	} else {
-//room 2 generation
 		start_point = room1_edges[hall1_position] + hall1_length;
 		
 		if (start_point <= 100) {
@@ -252,31 +249,40 @@ function generate_room(hall_value) {
 		}
 	}
 	
-	room_state.push(room_point_array);
-	room_state.flat();
 	
-//removes duped entries
+	//Random room generation is finished, might add hallways, which is easy. maybe.
+	
+	room_state.push(room_point_array);
+	room_state.flat(10);
+	
+	//removes duped entries
 	room_state.concat(room_state);
 	room_point_array.concat(room_point_array);
 	
 }
 function generate_first_normal_room() {
-//Now we need to generate the room width, which is very easy. 
+	
+	//now we have our starting point, start_point.
+	//it stores the beginning/starting point for room generation, and is the basis of all calculation.
+	//it's possible values are 49, 50, 51, 72, 73, and 74.
+	
+	//Now we need to generate the room width, which is very easy. 
 	room_width_r1 = random_int(4);
 	room_width_r1 += 2;
 	
 	width_end_point = start_point + room_width_r1;
 	
-//We have width_end_point which is the second corner of the room. now we need the height.
-//The room height is much more complex though.
-//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
+	//We have width_end_point which is the second corner of the room. now we need the height.
+	//The room height is much more complex though.
+	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
 	
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-//Now we have kind of an upside down L shape, now it just needs to be filled in!
+	
+	//Now we have kind of an upside down L shape, now it just needs to be filled in!
 	
 	corner_point = start_point + room_width_r1;
 	
@@ -286,8 +292,7 @@ function generate_first_normal_room() {
 			room_point_array.push(i2 + recurse_fill);
 		}
 		recurse_fill += 23;
-	}
-//No clue why this works, or why I used i2
+	} //No clue why this works
 	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
@@ -295,25 +300,31 @@ function generate_first_normal_room() {
 		return 0;
 	});
 
-}
 
-function generate_normal_room() {
-//Now we need to generate the room width, which is very easy. 
+}function generate_normal_room() {
+	
+	//now we have our starting point, start_point.
+	//it stores the beginning/starting point for room generation, and is the basis of all calculation.
+	//it's possible values are 49, 50, 51, 72, 73, and 74.
+	
+	//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
 	
 	width_end_point = start_point + room_width_r1;
 	
-//We have width_end_point which is the second corner of the room. now we need the height.
-//The room height is much more complex though.
-//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
+	//We have width_end_point which is the second corner of the room. now we need the height.
+	//The room height is much more complex though.
+	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
 	
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-//Now we have kind of an upside down L shape, now it just needs to be filled in!
+	
+	//Now we have kind of an upside down L shape, now it just needs to be filled in!
+	
 	corner_point = start_point + room_width_r1;
 	
 	recurse_fill = 0;
@@ -322,7 +333,7 @@ function generate_normal_room() {
 			room_point_array.push(i2 + recurse_fill);
 		}
 		recurse_fill += 23;
-	} //No clue why this works, or why I used i2
+	} //No clue why this works
 	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
@@ -334,22 +345,25 @@ function generate_normal_room() {
 
 
 function generate_upside_room() {
-//Now we need to generate the room width, which is very easy. 
+	
+	//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
 	
 	width_end_point = start_point + room_width;
 	
-//We have width_end_point which is the second corner of the room. now we need the height.
-//The room height is much more complex though.
-//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
+	//We have width_end_point which is the second corner of the room. now we need the height.
+	//The room height is much more complex though.
+	//ARRAYS ARE STORED LINEARLY, ADD 23 TO FIND THE NEXT ROW.
 	
 	room_height = random_int(4);
 	room_height += 2;
 	
 	height_end_point = start_point + room_height;
 	
-//Now we have kind of an upside down L shape, now it just needs to be filled in!
+	
+	//Now we have kind of an upside down L shape, now it just needs to be filled in!
+	
 	
 	recurse_fill = 0;
 	for (i = start_point; i <= height_end_point+1; i++) {
@@ -357,10 +371,8 @@ function generate_upside_room() {
 			room_point_array.push(i2 - recurse_fill);
 		}
 		recurse_fill += 23;
-	} //No clue why this works, or why I used i2
+	} //No clue why this works
 	
-	
-//essential to prevent clipping above map
 	room_point_array.sort(function(a,b) {
 		return b - a;
 	});
@@ -377,7 +389,7 @@ function generate_upside_room() {
 }
 
 function generate_hall() {
-//find right edges of room1
+	//find right edges of room1
 	for (index = 0; index < room_point_array.length; index++) {
 		if (room_point_array[index] + 1 != room_point_array[index + 1]) {
 			room1_edges.push(room_point_array[index]);
@@ -391,7 +403,7 @@ function generate_hall() {
 		room_point_array.push(room1_edges[hall1_position] + i);
 	}
 	
-//Why does .sort() not sort numerically but based off of UTF-8?
+	//Why does .sort() not sort numerically but based off of UTF-8?
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
@@ -400,10 +412,10 @@ function generate_hall() {
 	generate_room(1);
 }
 
-//ELEMENT GENERATION															////////////////////////////////////
+//ELEMENT GENERATION
 
 function generate_player() {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	player_array_pos = random_int(7)
 	used_slots[0]= player_array_pos;
 	flattened_data[room_point_array[player_array_pos]] = "0";
@@ -415,15 +427,16 @@ function regenerate_player() {
 }
 
 function generate_door() {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	door_location = random_int(room_point_array.length);
 	
-//prevents the door from spawning in the hall
+	//prevents the door from spawning in the hall
 	
 	door_spawnable = 0;
 	 while (door_spawnable != 1) {
 		
-//regens if below and above are empty / inside hall
+		
+		//regens if below and above are empty / inside hall
 		if (flattened_data[room_point_array[door_location] - 23] == "&emsp14;") {
 			if (flattened_data[room_point_array[door_location] + 23] == "&emsp14;") {
 				door_location = random_int(room_point_array.length);
@@ -451,7 +464,7 @@ function generate_door() {
 		}
 	}
 	
-//prevents door from spawning on player
+	//prevents door from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -463,7 +476,6 @@ function generate_door() {
 			}
 		}
 	}
-	
 		used_slots[1] = door_location;
 		flattened_data[room_point_array[door_location]] = "<div id='door_locked'>#</div>";
 }
@@ -473,13 +485,13 @@ function generate_enemy(enemy_tier) {
 
 	if (enemy_tier == 1) {
 		
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	enemy1_health = 4;
 	enemy1_location = random_int(room_point_array.length);
-//prevents door from spawning on player
+	//prevents door from spawning on player
 	
 	
-//prevents enemy1 from spawning on player
+	//prevents enemy1 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -495,12 +507,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy1_location]] = "<div id='f_tier'>&</div>";
 		
 	} else if (enemy_tier == 2) {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	enemy2_health = 7;
 	enemy2_location = random_int(room_point_array.length);
 	
 	
-//prevents enemy2 from spawning on player
+	//prevents enemy2 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -518,11 +530,11 @@ function generate_enemy(enemy_tier) {
 		
 	} else if (enemy_tier == 3) {
 	
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	enemy3_health = 10;
 	enemy3_location = random_int(room_point_array.length);
 	
-//prevents enemy3 from spawning on player
+	//prevents enemy3 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -539,12 +551,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
 		
 	} else if (enemy_tier == 4) {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	enemy4_health = 12;
 	enemy4_location = random_int(room_point_array.length);
 	
 	
-//prevents enemy4 from spawning on player
+	//prevents enemy4 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -561,12 +573,12 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
 		
 	} else if (enemy_tier == 5) {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	enemy5_health = 17;
 	enemy5_location = random_int(room_point_array.length);
 	
 	
-//prevents enemy5 from spawning on player
+	//prevents enemy5 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -589,10 +601,10 @@ function generate_potion(potion_tier) {
 	
 	if (potion_tier == 1) {
 	
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	potion1_location = random_int(room_point_array.length);
 	
-//prevents potion1 from spawning on player
+	//prevents potion1 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -600,25 +612,7 @@ function generate_potion(potion_tier) {
 				potion1_location = random_int(room_point_array.length);
 				generation_counter = 0;
 			} else {
-<<<<<<< Updated upstream
-				door_spawnable = 1;
-			}
-		}
-		
-		
-		//prevents door from spawning on player
-		door_counter = 0;
-		while (door_counter != 1) {
-			for (index = 0; index <= used_slots.length; index++) {
-				if (door_location == used_slots[index]) {
-					door_location = random_int(room_point_array.length);
-					door_counter = 0;
-				} else {
-					door_counter = 1;
-				}
-=======
 				generation_counter = 1;
->>>>>>> Stashed changes
 			}
 		}
 	}
@@ -628,78 +622,10 @@ function generate_potion(potion_tier) {
 		
 	} else if (potion_tier == 2) {
 	
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	potion2_location = random_int(room_point_array.length);
 	
-<<<<<<< Updated upstream
-		if (enemy_tier == 1) {
-			
-		//obtained a random position from the generated room
-		enemy1_health = 4;
-		enemy1_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy1_location == used_slots[i]) {
-				enemy1_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[2] = enemy1_location;
-			flattened_data[room_point_array[enemy1_location]] = "<div id='f_tier'>&</div>";
-			
-		} else if (enemy_tier == 2) {
-		//obtained a random position from the generated room
-		enemy2_health = 7;
-		enemy2_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy2_location == used_slots[i]) {
-				enemy2_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[5] = enemy2_location;
-			flattened_data[room_point_array[enemy2_location]] = "<div id='d_tier'>&</div>";
-			
-		} else if (enemy_tier == 3) {
-		
-		//obtained a random position from the generated room
-		enemy3_health = 10;
-		enemy3_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy3_location == used_slots[i]) {
-				enemy3_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[6] = enemy3_location;
-			flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
-			
-		} else if (enemy_tier == 4) {
-		//obtained a random position from the generated room
-		enemy4_health = 12;
-		enemy4_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy4_location == used_slots[i]) {
-				enemy4_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[7] = enemy4_location;
-			flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
-			
-		} else if (enemy_tier == 5) {
-		//obtained a random position from the generated room
-		enemy5_health = 17;
-		enemy5_location = random_int(room_point_array.length);
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (enemy5_location == used_slots[i]) {
-				enemy5_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[8] = enemy5_location;
-			flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
-=======
-//prevents potion2 from spawning on player
+	//prevents potion2 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -721,10 +647,10 @@ function generate_potion(potion_tier) {
 
 
 function generate_cash() {
-//obtained a random position from the generated room
+	//obtained a random position from the generated room
 	cash1_location = random_int(room_point_array.length);
 	
-//prevents door from spawning on player
+	//prevents door from spawning on player
 	for (i = 0; i <= used_slots.length; i++) {
 		if (cash1_location == used_slots[i]) {
 			cash1_location = random_int(room_point_array.length);
@@ -736,6 +662,7 @@ function generate_cash() {
 
 
 //KEYPRESS FUNCTIONS
+
 function d_key_down() {
 	if (pause_state != 1) {
 		document.getElementById("user_alert").innerHTML = "";
@@ -752,6 +679,7 @@ function a_key_down() {
 	}
 }
 
+
 function s_key_down() {
 		document.getElementById("user_alert").innerHTML = "";
 	if (pause_state != 1) {
@@ -760,6 +688,7 @@ function s_key_down() {
 	} else {
 		move_cursor("down");
 	}
+	
 }
 
 function w_key_down() {
@@ -770,6 +699,7 @@ function w_key_down() {
 	} else {
 		move_cursor("up");
 	}
+	
 }
 
 function move_cursor(cursor_direction) {
@@ -790,64 +720,31 @@ function move_cursor(cursor_direction) {
 		if (!(cursor_pos + 23 >= 146)) {
 			
 			cursor_pos +=23;
->>>>>>> Stashed changes
 			
 			flattened_data[prev_cursor] = "&emsp14;";
 			flattened_data[cursor_pos] = "<div id='sprite_p_rotate'>0</div>";
+		
 		}
+		
 	}
+	
 }
 
+
 function new_floor() {
+	
 	used_slots = [];
 	room_point_array = [];
 	room1_edges = [];
 	
-<<<<<<< Updated upstream
-	function generate_potion(potion_tier) {
-		
-		if (potion_tier == 1) {
-		
-		//obtained a random position from the generated room
-		potion1_location = random_int(room_point_array.length);
-		
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (potion1_location == used_slots[i]) {
-				potion1_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[3] = potion1_location;
-			flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
-			
-		} else if (potion_tier == 2) {
-		
-		//obtained a random position from the generated room
-		potion2_location = random_int(room_point_array.length);
-		
-		//prevents door from spawning on player
-		for (i = 0; i <= used_slots.length; i++) {
-			if (potion2_location == used_slots[i]) {
-				potion2_location = random_int(room_point_array.length);
-			}
-		}
-			used_slots[8] = potion2_location;
-			flattened_data[room_point_array[potion1_location]] = "<div id='d_tier'>Q</div>";
-			
-		}
-		
-	}
-	
-=======
 	enemy1_health = 4;
-//flattens and joins the data
-	flattened_data = table_data.flat();
->>>>>>> Stashed changes
+	//flattens and joins the data
+	flattened_data = table_data.flat(10);
 	
 	generate_room();
 	generate_hall();
 	
-//adds room data to flattened_data for printing
+	//adds room data to flattened_data for printing
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = ".";
 	}
@@ -856,7 +753,6 @@ function new_floor() {
 	generate_door();
 	generate_enemy(1);
 	
-//player progression checks
 	if (current_floor >= 3) {
 		generate_enemy(2);
 	}
@@ -885,195 +781,64 @@ function new_floor() {
 	if (current_floor >= highscore) {
 		document.getElementById("highscore").innerHTML = "Highscore: " + current_floor;
 	}
+	
 	document.getElementById("floor_level").innerHTML = "Floor: " + current_floor;
 }
 
 //checks what tile type is in front of the player
-//god don't make me comment this
 function check_tile() {
 	
-//if space free
 	if (flattened_data[room_point_array[player_array_pos] + player_direction] == ".") {
+		
 		play_random_walk();
 		move_player();
 		
-//if door (locked)
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='door_locked'>#</div>") {
-		
-//unlock if all enemies dead
+	
 		if (enemy1_health <= 0 && enemy2_health <= 0 && enemy3_health <= 0 && enemy4_health <= 0) {
 			flattened_data[room_point_array[player_array_pos] + player_direction] = '<div id="door_open">_</div>';
-//else notify user door is locked
 		} else {
 			document.getElementById("user_alert").innerHTML = "Locked!";
 		}
-//if door (open)
+	
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == '<div id="door_open">_</div>') {
+		
 		sfx_door1.pause();
 		sfx_door1.currentTime = 0;
 		sfx_door1.play();
 		new_floor();
 		document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
-//if potion f_tier
+		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>Q</div>") {
 		health += 3 + recovery_amount;
 		
 		if (health > max_health) {
 			health = max_health;
 		}
+		
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
 		play_random_walk();
 		move_player();
-//if potion d_tier
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>Q</div>") {
 		health += 5 + recovery_amount;
 		
 		if (health > max_health) {
 			health = max_health;
 		}
+		
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
 		play_random_walk();
 		move_player();
-//if enemy f_tier
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>&</div>") {
-//player random hurt
+		
 		if (random_int(2) == 0) {
 			shake_effect("health_container");
 			health -= enemy1_atk;
 		}
-//attack enemy
 		enemy1_health -= atk;
-		
-//player death
 		if (health <= 0) {
-			player_death();
-//enemy death
-		} else if (enemy1_health <= 0) {
-			random_enemy_drop();
-		}
-		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-//if enemy d_tier
-	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>&</div>") {
-//enemy attack
-		if (random_int(2) == 0) {
-			shake_effect("health_container");
-			health -= enemy2_atk;
-		}
-//player attack
-		enemy2_health -= atk;
-//player death
-		if (health <= 0) {
-			player_death();
-//enemy death
-		} else if (enemy2_health <= 0) {
-			random_enemy_drop();
-		}
-		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-//if enemy c_tier
-	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='c_tier'>&</div>") {
-//enemy attack
-		if (random_int(2) == 0) {
-			shake_effect("health_container");
-			health -= enemy3_atk;
-		}
-//player attack
-		enemy3_health -= atk;
-//player death
-		if (health <= 0) {
-			player_death();
-//enemy death
-		} else if (enemy3_health <= 0) {
-			random_enemy_drop_d_tier();
-		}
-		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-//if enemy b tier
-	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='b_tier'>&</div>") {
-//enemy attack
-		if (random_int(2) == 0) {
-			shake_effect("health_container");
-			health -= enemy4_atk;
-		}
-//player attack
-		enemy4_health -= atk;
-//player death
-		if (health <= 0) {
-			player_death();
-		} else if (enemy4_health <= 0) {
-			random_enemy_drop_d_tier();
-		}
-		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-//if enemy a tier
-	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='a_tier'>&</div>") {
-//enemy attack
-		if (random_int(2) == 0) {
-			shake_effect("health_container");
-			health -= enemy5_atk;
-		}
-//player attack
-		enemy5_health -= atk;
-//player death
-		if (health <= 0) {
-			player_death();
-		} else if (enemy5_health <= 0) {
-			random_enemy_drop_d_tier();
-		}
-		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-//if cash
-	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>$</div>") {
-		cash ++;
-		play_random_walk();
-		move_player();
-		document.getElementById("cash_container").innerHTML = "Cash: " + cash;
-		shake_effect("cash_container");
-	} else {
-		regenerate_player();
-	}
-}
-
-function random_enemy_drop() {
-	
-			enemy_random_drop = random_int(3);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
-			}
-}
-
-function random_enemy_drop_d_tier() {
-	
-			enemy_random_drop = random_int(2);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
-			}
-}
-
-
-function player_death() {
 			
 		document.getElementById("game_container").style.color = "red";
 		document.getElementById("health_container").style.color = "red";
@@ -1095,13 +860,253 @@ function player_death() {
 			document.getElementById("title_tab").innerHTML= "You Died!";
 			draw_death_screen();
 			
+			
 			if (current_floor >= highscore) {
 				highscore = current_floor;
 			}
 			localStorage.setItem('highscore_stored', current_floor);
 			
 			current_floor = 0;
+			
 			draw_screen = 1;
+		} else if (enemy1_health <= 0) {
+			
+			enemy_random_drop = random_int(3);
+			
+			if (enemy_random_drop == 0) {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+			} else {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+			}
+		}
+		
+		sfx_hit1.pause();
+		sfx_hit1.currentTime = 0;
+		sfx_hit1.play();
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
+	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>&</div>") {
+		
+		if (random_int(2) == 0) {
+			shake_effect("health_container");
+			health -= enemy2_atk;
+		}
+		enemy2_health -= atk;
+		if (health <= 0) {
+			
+		document.getElementById("game_container").style.color = "red";
+		document.getElementById("health_container").style.color = "red";
+		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+			
+			sfx_kill1.pause();
+			sfx_kill1.currentTime = 0;
+			sfx_kill1.play();
+			
+			save_state = flattened_data.slice(0);
+			
+			for (index = 0; index < room_point_array.length; index++) {
+				flattened_data[room_point_array[index]] = "&emsp14;";
+			}
+			
+			clearInterval(death_color_interval);
+			pause_state = 1;
+			document.getElementById("title_tab").innerHTML= "You Died!";
+			draw_death_screen();
+			
+			
+			if (current_floor >= highscore) {
+				highscore = current_floor;
+			}
+			localStorage.setItem('highscore_stored', current_floor);
+			
+			current_floor = 0;
+			
+			draw_screen = 1;
+		} else if (enemy2_health <= 0) {
+			
+			enemy_random_drop = random_int(3);
+			
+			if (enemy_random_drop == 0) {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+			} else {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+			}
+		}
+		
+		sfx_hit1.pause();
+		sfx_hit1.currentTime = 0;
+		sfx_hit1.play();
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
+	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='c_tier'>&</div>") {
+		
+		if (random_int(2) == 0) {
+			shake_effect("health_container");
+			health -= enemy3_atk;
+		}
+		enemy3_health -= atk;
+		if (health <= 0) {
+			
+		document.getElementById("game_container").style.color = "red";
+		document.getElementById("health_container").style.color = "red";
+		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+			
+			sfx_kill1.pause();
+			sfx_kill1.currentTime = 0;
+			sfx_kill1.play();
+			
+			save_state = flattened_data.slice(0);
+			
+			for (index = 0; index < room_point_array.length; index++) {
+				flattened_data[room_point_array[index]] = "&emsp14;";
+			}
+			
+			clearInterval(death_color_interval);
+			pause_state = 1;
+			document.getElementById("title_tab").innerHTML= "You Died!";
+			draw_death_screen();
+			
+			
+			if (current_floor >= highscore) {
+				highscore = current_floor;
+			}
+			localStorage.setItem('highscore_stored', current_floor);
+			
+			current_floor = 0;
+			
+			draw_screen = 1;
+		} else if (enemy3_health <= 0) {
+			
+			enemy_random_drop = random_int(2);
+			
+			if (enemy_random_drop == 0) {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
+			} else {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
+			}
+		}
+		
+		sfx_hit1.pause();
+		sfx_hit1.currentTime = 0;
+		sfx_hit1.play();
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
+	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='b_tier'>&</div>") {
+		
+		if (random_int(2) == 0) {
+			shake_effect("health_container");
+			health -= enemy4_atk;
+		}
+		enemy4_health -= atk;
+		if (health <= 0) {
+			
+		document.getElementById("game_container").style.color = "red";
+		document.getElementById("health_container").style.color = "red";
+		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+			
+			sfx_kill1.pause();
+			sfx_kill1.currentTime = 0;
+			sfx_kill1.play();
+			
+			save_state = flattened_data.slice(0);
+			
+			for (index = 0; index < room_point_array.length; index++) {
+				flattened_data[room_point_array[index]] = "&emsp14;";
+			}
+			
+			clearInterval(death_color_interval);
+			pause_state = 1;
+			document.getElementById("title_tab").innerHTML= "You Died!";
+			draw_death_screen();
+			
+			
+			if (current_floor >= highscore) {
+				highscore = current_floor;
+			}
+			localStorage.setItem('highscore_stored', current_floor);
+			
+			current_floor = 0;
+			
+			draw_screen = 1;
+		} else if (enemy4_health <= 0) {
+			
+			enemy_random_drop = random_int(3);
+			
+			if (enemy_random_drop == 0) {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+			} else {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+			}
+		}
+		
+		sfx_hit1.pause();
+		sfx_hit1.currentTime = 0;
+		sfx_hit1.play();
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
+	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='a_tier'>&</div>") {
+		
+		if (random_int(2) == 0) {
+			shake_effect("health_container");
+			health -= enemy5_atk;
+		}
+		enemy5_health -= atk;
+		if (health <= 0) {
+			
+		document.getElementById("game_container").style.color = "red";
+		document.getElementById("health_container").style.color = "red";
+		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
+			
+			sfx_kill1.pause();
+			sfx_kill1.currentTime = 0;
+			sfx_kill1.play();
+			
+			save_state = flattened_data.slice(0);
+			
+			for (index = 0; index < room_point_array.length; index++) {
+				flattened_data[room_point_array[index]] = "&emsp14;";
+			}
+			
+			clearInterval(death_color_interval);
+			pause_state = 1;
+			document.getElementById("title_tab").innerHTML= "You Died!";
+			draw_death_screen();
+			
+			
+			if (current_floor >= highscore) {
+				highscore = current_floor;
+			}
+			localStorage.setItem('highscore_stored', current_floor);
+			
+			current_floor = 0;
+			
+			draw_screen = 1;
+		} else if (enemy5_health <= 0) {
+			
+			enemy_random_drop = random_int(3);
+			
+			if (enemy_random_drop == 0) {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+			} else {
+			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+			}
+		}
+		
+		sfx_hit1.pause();
+		sfx_hit1.currentTime = 0;
+		sfx_hit1.play();
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+		
+	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>$</div>") {
+		cash ++;
+		play_random_walk();
+		move_player();
+		document.getElementById("cash_container").innerHTML = "Cash: " + cash;
+		shake_effect("cash_container");
+	} else {
+		regenerate_player();
+	}
+	
 }
 
 //moves the player if check_tile saw the tile was free or there was potion/cash
@@ -1120,7 +1125,8 @@ function logKey(e) {
 	if (keypress == "Escape") {
 		
 		upgrade_state = 0;
-//MAKE SURE TO USE .SLICE FOR COPIES. ARRAYS ARE REFERENCES, NOT OBJECTS.
+		//23x11 including <br> at the end.the below values are the visible corners.
+		//MAKE SURE TO USE .SLICE FOR COPIES. ARRAYS ARE REFERENCES, NOT OBJECTS.
 		if (health <= 0) {
 		} else if (pause_state == 0) {
 			
@@ -1144,214 +1150,166 @@ function logKey(e) {
 			sfx_pause2.play();
 			pause_state = 0;
 			
-//restores session and player location
+			//restores session and player location
 			flattened_data = save_state;
 			regenerate_player();
+			
 		}
 		
-	} else if (keypress == "Enter") {
-		
-		if (health <= 0) {
-		
-		death_color_interval = setInterval(function() {
-			document.getElementById("game_container").style.color = page_color_live;
-			document.getElementById("health_container").style.color = page_color_live;
-		}, 1);
-				
-		sfx_pause2.pause();
-		sfx_pause2.currentTime = 0;
-		sfx_pause2.play();
-			health = 3;
-			max_health = 3;
-			enemy1_health = 0;
-			enemy2_health = 0;
-			enemy3_health = 0;
-			enemy4_health = 0;
-			atk = 1;
-			recovery_amount = 0;
-			cash = 0;
-			new_floor();
-			pause_state = 0;
-			death_state = 0;
-			document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
+		} else if (keypress == "Enter") {
+			
+			if (health <= 0) {
 			
 			
-<<<<<<< Updated upstream
-			} else if (keypress == "Enter") {
+			death_color_interval = setInterval(function() {
+				document.getElementById("game_container").style.color = page_color_live;
+				document.getElementById("health_container").style.color = page_color_live;
+			}, 1);
 				
-				if (health <= 0) {
+			sfx_pause2.pause();
+			sfx_pause2.currentTime = 0;
+			sfx_pause2.play();
+				health = 3;
+				max_health = 3;
+				enemy1_health = 0;
+				enemy2_health = 0;
+				enemy3_health = 0;
+				enemy4_health = 0;
+				atk = 1;
+				recovery_amount = 0;
+				cash = 0;
+				new_floor();
+				pause_state = 0;
+				death_state = 0;
+				document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 				
 				
-				death_color_interval = setInterval(function() {
-					document.getElementById("game_container").style.color = page_color_live;
-					document.getElementById("health_container").style.color = page_color_live;
-				}, 1);
-					
-				sfx_pause2.pause();
-				sfx_pause2.currentTime = 0;
-				sfx_pause2.play();
-					health = 3;
-					max_health = 3;
-					enemy1_health = 0;
-					enemy2_health = 0;
-					enemy3_health = 0;
-					enemy4_health = 0;
-					atk = 1;
-					recovery = 0;
-					cash = 0;
-=======
-			document.getElementById("cash_container").innerHTML = "Cash: 0";
-			document.getElementById("atk_container").innerHTML = "ATK: 1";
-			document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-			document.getElementById("game_container").innerHTML = flattened_data.join("");
-			
-		} else if (pause_state == 1) {
+				document.getElementById("cash_container").innerHTML = "Cash: 0";
+				document.getElementById("atk_container").innerHTML = "ATK: 1";
+				document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+				document.getElementById("game_container").innerHTML = flattened_data.join("");
+				
+			} else if (pause_state == 1) {
 //pause screen select
-			if (upgrade_state != 1) {
-				if (cursor_pos == 32) {
-					if (selected_color == 5) {
-						clearInterval(selected_color_interval);
+				if (upgrade_state != 1) {
+					if (cursor_pos == 32) {
+						if (selected_color == 5) {
+							clearInterval(selected_color_interval);
+						}
+						selected_color += 1;
+						if (selected_color == 6) {
+							selected_color = 0;
+						}
+						random_color = selected_color;
+						page_color();
+					} else if (cursor_pos == 55) {
+						current_floor = 0;
+						health = max_health;
+						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+						new_floor();
+						pause_state = 0;
+						draw_screen = 1;
 					}
-					selected_color += 1;
-					if (selected_color == 6) {
-						selected_color = 0;
-					}
-					random_color = selected_color;
-					page_color();
-				} else if (cursor_pos == 55) {
-					current_floor = 0;
-					health = max_health;
-					document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
->>>>>>> Stashed changes
-					new_floor();
-					pause_state = 0;
-					draw_screen = 1;
-				}
-				
+					
 //upgrade screen select
-<<<<<<< Updated upstream
-					} else if (upgrade_state = 1) {
-	//first selection
-						if (cursor_pos == 32) {
-							if (cash - 1 >= 0) {
-								cash--;
-								atk ++;
-								shake_effect("cash_container");
-								shake_effect("atk_container");
-							}
-							
-	//second selection
-						} else if (cursor_pos == 55) {
-							if (cash - 1 >= 0) {
-								cash--;
-								max_health ++;
-								shake_effect("cash_container");
-								shake_effect("health_container");
-							}
-						} else if (cursor_pos == 78) {
+				} else if (upgrade_state = 1) {
+//first selection
+					if (cursor_pos == 32) {
+						if (cash - 1 >= 0) {
+							cash--;
+							atk ++;
+							document.getElementById("atk_container").innerHTML = "ATK: " + atk;
+							shake_effect("cash_container");
+							shake_effect("atk_container");
+						}
+						
+//second selection
+					} else if (cursor_pos == 55) {
+						if (cash - 1 >= 0) {
+							cash--;
+							max_health ++;
+							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+							shake_effect("cash_container");
+							shake_effect("health_container");
+						}
+					} else if (cursor_pos == 78) {
+						if (cash - 1 >= 0) {
 							cash --;
 							recovery_amount ++;
+							document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
 							shake_effect("cash_container");
 							shake_effect("recovery_container");
 						}
 						
-						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
-						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-						document.getElementById("cash_container").innerHTML = "Cash: " + cash;
-						
-=======
-			} else if (upgrade_state = 1) {
-//first selection
-				if (cursor_pos == 32) {
-					if (cash - 1 >= 0) {
-						cash--;
-						atk ++;
-						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
-						shake_effect("cash_container");
-						shake_effect("atk_container");
 					}
-//second selection
-				} else if (cursor_pos == 55) {
-					if (cash - 1 >= 0) {
-						cash--;
-						max_health ++;
-						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-						shake_effect("cash_container");
-						shake_effect("health_container");
-					}
-				} else if (cursor_pos == 78) {
-					if (cash - 1 >= 0) {
-						cash --;
-						recovery_amount ++;
-						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
-						shake_effect("cash_container");
-						shake_effect("recovery_container");
->>>>>>> Stashed changes
-					}
-				}
 					
-				document.getElementById("cash_container").innerHTML = "Cash: " + cash;
+					document.getElementById("cash_container").innerHTML = "Cash: " + cash;
+					
+				}
 			}
-		}
-	} else {
+		} else {
 //D KEY
-		if (keypress == "KeyD") {
-			if (death_state != 1) {
-				d_key_down();
-				draw_screen = 1;
-			}
+			if (keypress == "KeyD") {
+				if (death_state != 1) {
+					
+					d_key_down();
+					draw_screen = 1;
+				}
 //A KEY
-		} else if (keypress == "KeyA") {
-			if (death_state != 1) {
-				a_key_down();
-				draw_screen = 1;
-			}
+			} else if (keypress == "KeyA") {
+				if (death_state != 1) {
+					a_key_down();
+					draw_screen = 1;
+				}
 //S KEY
-		} else if (keypress == "KeyS") {
-			if (death_state != 1) {
-				s_key_down();
-				draw_screen = 1;
-			}
+			} else if (keypress == "KeyS") {
+				if (death_state != 1) {
+					s_key_down();
+					draw_screen = 1;
+				}
+				
 //W KEY
-		} else if (keypress == "KeyW") {
-			if (death_state != 1) {		
-				w_key_down();
-				draw_screen = 1;
-			}
+			} else if (keypress == "KeyW") {
+				if (death_state != 1) {
+					
+					w_key_down();
+					draw_screen = 1;
+				}
 //E KEY
-		} else if (keypress == "KeyE") {
-			if (pause_state != 1) {
+			} else if (keypress == "KeyE") {
+				if (pause_state != 1) {
 				if (upgrade_state == 0) {
-					sfx_pause1.pause();
-					sfx_pause1.currentTime = 0;
-					sfx_pause1.play();
-					
-					save_state = flattened_data.slice(0);
-					
-					
-					for (index = 0; index < room_point_array.length; index++) {
-						flattened_data[room_point_array[index]] = "&emsp14;";
+						sfx_pause1.pause();
+						sfx_pause1.currentTime = 0;
+						sfx_pause1.play();
+						
+						save_state = flattened_data.slice(0);
+						
+						
+						for (index = 0; index < room_point_array.length; index++) {
+							flattened_data[room_point_array[index]] = "&emsp14;";
+						}
+						
+						draw_upgrade_screen();
+						upgrade_state = 1;
+						pause_state = 1;
+						draw_screen = 1;
+					} else {
+						upgrade_state = 0;
+						regenerate_player();
+						draw_screen = 1;
+						sfx_pause2.pause();
+						sfx_pause2.currentTime = 0;
+						sfx_pause2.play();
+						pause_state = 0;
+						
 					}
-					
-					draw_upgrade_screen();
-					upgrade_state = 1;
-					pause_state = 1;
-					draw_screen = 1;
-				} else {
-					upgrade_state = 0;
-					regenerate_player();
-					draw_screen = 1;
-					sfx_pause2.pause();
-					sfx_pause2.currentTime = 0;
-					sfx_pause2.play();
-					pause_state = 0;
 				}
 			}
-		}
 			
-	}
-	
+		}
 	if (draw_screen == 1) {
+	
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
 		draw_screen = 0;
 	}
@@ -1382,17 +1340,19 @@ function shake_effect(shake_container) {
 	},30);
 }
 
-//spinning cursor
+
 function spin_effect() {
 	
 	let current_rotation = 0;
 	let inter2 = setInterval(function() {
 		
+		
 		current_rotation += 1;
 		document.getElementById("sprite_p_rotate").style.transform = 'rotate(' + current_rotation + 'deg)';
+		
 	},1);
 }
-//random walk sfx
+
 function play_random_walk() {
 	var random_sound = random_int(4);
 	if (random_sound == 0) {
@@ -1413,11 +1373,14 @@ function play_random_walk() {
 		sfx_step4.play();
 	}
 }
-//pause screen data
+
 function draw_pause_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
 	}
+	cursor_pos = 32;
+	prev_cursor = 32;
+	
 	
 	flattened_data[0] = '<div id="sprite_p">$</div>';
 	flattened_data[21] = '<div id="sprite_p">$</div>';
@@ -1426,6 +1389,7 @@ function draw_pause_screen() {
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
+	//arrays shorten the amount of times i have to type flattened_data
 	let paused_array = ["P", "A", "U", "S", "E", "D"];
 	
 	for (i = 0; i <= 5; i++) {
@@ -1433,6 +1397,7 @@ function draw_pause_screen() {
 	}
 	
 	let paused_array_set1 = ["C", "O", "L", "O", "R"];
+	
 	
 	for (i = 0; i <= 4; i++) {
 		flattened_data[i + 33] = paused_array_set1[i];
@@ -1443,18 +1408,20 @@ function draw_pause_screen() {
 	for (i = 0; i <= 4; i++) {
 		flattened_data[i + 56] = paused_array_set2[i];
 	}
+	
 }
-//death screen data
+
 function draw_death_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
 	}
-	
 	flattened_data[0] = '<div id="sprite_p">$</div>';
 	flattened_data[21] = '<div id="sprite_p">$</div>';
 	flattened_data[230] = '<div id="sprite_p">$</div>';
 	flattened_data[251] = '<div id="sprite_p">$</div>';
 	
+	
+	//arrays shorten the amount of times i have to type flattened_data
 	let death_array = ["Y", "O", "U", "&emsp14;", "D", "I", "E", "D"];
 	
 	for (i = 0; i <= 7; i++) {
@@ -1472,6 +1439,9 @@ function draw_upgrade_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
 	}
+	cursor_pos = 32;
+	prev_cursor = 32;
+	
 	
 	flattened_data[0] = '<div id="sprite_p">$</div>';
 	flattened_data[21] = '<div id="sprite_p">$</div>';
@@ -1480,6 +1450,7 @@ function draw_upgrade_screen() {
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
+	//arrays shorten the amount of times i have to type flattened_data
 	let paused_array = ["U", "P", "G", "R", "A", "D", "E"];
 	
 	for (i = 0; i <= 6; i++) {
@@ -1489,8 +1460,6 @@ function draw_upgrade_screen() {
 	let paused_array_set1 = ["A", "T", "K", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "+", "1"];
 	
 	
-<<<<<<< Updated upstream
-=======
 	for (i = 0; i <= 10; i++) {
 		flattened_data[i + 33] = paused_array_set1[i];
 	}
@@ -1507,7 +1476,6 @@ function draw_upgrade_screen() {
 		flattened_data[i + 79] = paused_array_set3[i];
 	}
 }
-
 //TODO
 
 //PRESTIGE MENU (P)
@@ -1515,6 +1483,3 @@ function draw_upgrade_screen() {
 //PRESTIGE UPGRADES
 //LOCAL PRESTIGE STORAGE
 //RESET PRESTIGE
-
-
->>>>>>> Stashed changes
