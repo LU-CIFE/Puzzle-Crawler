@@ -773,14 +773,7 @@ function check_tile() {
 		if (health <= 0) {
 			player_death();
 		} else if (enemy1_health <= 0) {
-			
-			enemy_random_drop = random_int(3);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
-			}
+			random_enemy_drop_f_tier();
 		}
 		
 		sfx_hit1.pause();
@@ -798,14 +791,7 @@ function check_tile() {
 		if (health <= 0) {
 			player_death();
 		} else if (enemy2_health <= 0) {
-			
-			enemy_random_drop = random_int(3);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
-			}
+			random_enemy_drop_f_tier();
 		}
 		
 		sfx_hit1.pause();
@@ -823,14 +809,7 @@ function check_tile() {
 		if (health <= 0) {
 			player_death();
 		} else if (enemy3_health <= 0) {
-			
-			enemy_random_drop = random_int(2);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
-			}
+			random_enemy_drop_d_tier();
 		}
 		
 		sfx_hit1.pause();
@@ -848,14 +827,7 @@ function check_tile() {
 		if (health <= 0) {
 			player_death();
 		} else if (enemy4_health <= 0) {
-			
-			enemy_random_drop = random_int(3);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
-			}
+			random_enemy_drop_d_tier();
 		}
 		
 		sfx_hit1.pause();
@@ -873,14 +845,7 @@ function check_tile() {
 		if (health <= 0) {
 			player_death();
 		} else if (enemy5_health <= 0) {
-			
-			enemy_random_drop = random_int(3);
-			
-			if (enemy_random_drop == 0) {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
-			} else {
-			flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
-			}
+			random_enemy_drop_d_tier();
 		}
 		
 		sfx_hit1.pause();
@@ -934,6 +899,28 @@ function player_death() {
 			localStorage.setItem('highscore_stored', current_floor);
 			current_floor = 0;
 			draw_screen = 1;
+}
+
+function random_enemy_drop_f_tier() {
+	
+	enemy_random_drop = random_int(3);
+	
+	if (enemy_random_drop == 0) {
+	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+	} else {
+	flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+	}
+}
+
+function random_enemy_drop_d_tier() {
+	
+	enemy_random_drop = random_int(2);
+	
+	if (enemy_random_drop == 0) {
+	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
+	} else {
+	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+	}
 }
 
 const log = document.getElementById('game_container');
