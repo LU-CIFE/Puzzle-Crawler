@@ -44,7 +44,7 @@ Hit `Esc` to resume.
 Hit `P` to enter the prestige menu.
 Use `W` & `S` to select a prestige option.
 Hit `Enter' to confirm.
-Each prestige upgrade will be carried over, even when you die.
+Each prestige upgrade will be carried over, even when you die and refresh the page.
 
 
 
