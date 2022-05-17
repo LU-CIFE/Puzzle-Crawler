@@ -210,28 +210,21 @@ function generate_room(hall_value) {
 			generate_upside_room();
 		}
 	}
-	
 	room_state.push(room_point_array);
 	room_state.flat();
 	
 //removes duped entries
 	room_state.concat(room_state);
 	room_point_array.concat(room_point_array);
-	
 }
 
-function generate_first_normal_room() {
-	
-	//Now we need to generate the room width, which is very easy. 
+function generate_first_normal_room() { 
 	room_width_r1 = random_int(4);
 	room_width_r1 += 2;
-	
 	width_end_point = start_point + room_width_r1;
 	
-	//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -245,7 +238,6 @@ function generate_first_normal_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
@@ -253,17 +245,12 @@ function generate_first_normal_room() {
 	});
 
 }function generate_normal_room() {
-	
-	//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
-	
 	width_end_point = start_point + room_width_r1;
 	
-	//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -277,27 +264,20 @@ function generate_first_normal_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
 		return 0;
 	});
-	
 }
 
-function generate_upside_room() {
-	
-//Now we need to generate the room width, which is very easy. 
+function generate_upside_room() { 
 	room_width = random_int(4);
 	room_width += 2;
-	
 	width_end_point = start_point + room_width;
 	
-//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 //Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -309,7 +289,6 @@ function generate_upside_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort(function(a,b) {
 		return b - a;
 	});
@@ -355,7 +334,6 @@ function generate_player() {
 	used_slots[0]= player_array_pos;
 	flattened_data[room_point_array[player_array_pos]] = "0";
 }
-
 //Draws the player in the new location
 function regenerate_player() {
 	flattened_data[room_point_array[player_array_pos]] = "0";
@@ -364,7 +342,6 @@ function regenerate_player() {
 function generate_door() {
 //obtained a random position from the generated room
 	door_location = random_int(room_point_array.length);
-	
 //prevents the door from spawning in the hall
 	door_spawnable = 0;
 	 while (door_spawnable != 1) {
@@ -396,7 +373,6 @@ function generate_door() {
 			door_spawnable = 1;
 		}
 	}
-	
 //prevents door from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
@@ -416,7 +392,6 @@ function generate_door() {
 function generate_enemy(enemy_tier) {
 
 	if (enemy_tier == 1) {
-		
 //obtained a random position from the generated room
 	enemy1_health = 4;
 	enemy1_location = random_int(room_point_array.length);
@@ -441,96 +416,85 @@ function generate_enemy(enemy_tier) {
 	enemy2_health = 7;
 	enemy2_location = random_int(room_point_array.length);
 	
-	
 //prevents enemy2 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy2_location == used_slots[index]) {
-				enemy2_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy2_location == used_slots[index]) {
+					enemy2_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
-	}
-	
 		used_slots[5] = enemy2_location;
 		flattened_data[room_point_array[enemy2_location]] = "<div id='d_tier'>&</div>";
-		
 	} else if (enemy_tier == 3) {
 	
 //obtained a random position from the generated room
-	enemy3_health = 10;
-	enemy3_location = random_int(room_point_array.length);
+		enemy3_health = 10;
+		enemy3_location = random_int(room_point_array.length);
 	
 //prevents enemy3 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy3_location == used_slots[index]) {
-				enemy3_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy3_location == used_slots[index]) {
+					enemy3_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
-	}
-	
 		used_slots[6] = enemy3_location;
 		flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
-		
 	} else if (enemy_tier == 4) {
 //obtained a random position from the generated room
-	enemy4_health = 12;
-	enemy4_location = random_int(room_point_array.length);
-	
+		enemy4_health = 12;
+		enemy4_location = random_int(room_point_array.length);
 	
 //prevents enemy4 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy4_location == used_slots[index]) {
-				enemy4_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
+		generation_counter = 0;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy4_location == used_slots[index]) {
+					enemy4_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
-	}
-	
 		used_slots[7] = enemy4_location;
 		flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
-		
 	} else if (enemy_tier == 5) {
 //obtained a random position from the generated room
-	enemy5_health = 17;
-	enemy5_location = random_int(room_point_array.length);
+		enemy5_health = 17;
+		enemy5_location = random_int(room_point_array.length);
 	
 	
 //prevents enemy5 from spawning on player
 	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy5_location == used_slots[index]) {
-				enemy5_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
+		while (generation_counter != 1) {
+			for (index = 0; index <= used_slots.length; index++) {
+				if (enemy5_location == used_slots[index]) {
+					enemy5_location = random_int(room_point_array.length);
+					generation_counter = 0;
+				} else {
+					generation_counter = 1;
+				}
 			}
 		}
-	}
-	
 		used_slots[8] = enemy5_location;
 		flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
-		
 	}
 }
 
 function generate_potion(potion_tier) {
 	
 	if (potion_tier == 1) {
-	
 //obtained a random position from the generated room
 	potion1_location = random_int(room_point_array.length);
 	
@@ -546,7 +510,6 @@ function generate_potion(potion_tier) {
 			}
 		}
 	}
-	
 		used_slots[3] = potion1_location;
 		flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
 		
@@ -569,12 +532,8 @@ function generate_potion(potion_tier) {
 	}
 		used_slots[8] = potion2_location;
 		flattened_data[room_point_array[potion1_location]] = "<div id='d_tier'>Q</div>";
-		
 	}
-	
 }
-
-
 
 function generate_cash() {
 //obtained a random position from the generated room
@@ -590,9 +549,7 @@ function generate_cash() {
 		flattened_data[room_point_array[cash1_location]] = "<div id='f_tier'>$</div>";
 }
 
-
 //KEYPRESS FUNCTIONS
-
 function d_key_down() {
 	if (pause_state != 1) {
 		document.getElementById("user_alert").innerHTML = "";
@@ -618,7 +575,6 @@ function s_key_down() {
 	} else {
 		move_cursor("down");
 	}
-	
 }
 
 function w_key_down() {
@@ -629,37 +585,27 @@ function w_key_down() {
 	} else {
 		move_cursor("up");
 	}
-	
 }
 
 function move_cursor(cursor_direction) {
 
 		prev_cursor = cursor_pos;
 	if (cursor_direction == "up") {
-		
 		if (!(cursor_pos - 23 <= 9)) {
 			
 			cursor_pos -= 23;
-		
 			flattened_data[prev_cursor] = "&emsp14;";
 			flattened_data[cursor_pos] = "<div id='sprite_p_rotate'>0</div>";
-		
 		}
 	} else {
-		
 		if (!(cursor_pos + 23 >= 146)) {
 			
 			cursor_pos +=23;
-			
 			flattened_data[prev_cursor] = "&emsp14;";
 			flattened_data[cursor_pos] = "<div id='sprite_p_rotate'>0</div>";
-		
 		}
-		
 	}
-	
 }
-
 
 function new_floor() {
 	
@@ -768,9 +714,7 @@ function check_tile() {
 			random_enemy_drop_f_tier();
 		}
 		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
+		play_sfx_hit1();
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='d_tier'>&</div>") {
@@ -786,9 +730,7 @@ function check_tile() {
 			random_enemy_drop_f_tier();
 		}
 		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
+		play_sfx_hit1();
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='c_tier'>&</div>") {
@@ -804,9 +746,7 @@ function check_tile() {
 			random_enemy_drop_d_tier();
 		}
 		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
+		play_sfx_hit1();
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='b_tier'>&</div>") {
@@ -822,9 +762,7 @@ function check_tile() {
 			random_enemy_drop_d_tier();
 		}
 		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
+		play_sfx_hit1();
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='a_tier'>&</div>") {
@@ -840,9 +778,7 @@ function check_tile() {
 			random_enemy_drop_d_tier();
 		}
 		
-		sfx_hit1.pause();
-		sfx_hit1.currentTime = 0;
-		sfx_hit1.play();
+		play_sfx_hit1();
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
 		
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>$</div>") {
@@ -854,9 +790,7 @@ function check_tile() {
 	} else {
 		regenerate_player();
 	}
-	
 }
-
 //moves the player if check_tile saw the tile was free or there was potion/cash
 function move_player () {
 	flattened_data[room_point_array[player_array_pos]] = ".";
@@ -869,9 +803,7 @@ function player_death() {
 		document.getElementById("health_container").style.color = "red";
 		document.getElementById("health_container").innerHTML = "Health: 0/" + max_health;
 			
-			sfx_kill1.pause();
-			sfx_kill1.currentTime = 0;
-			sfx_kill1.play();
+			play_sfx_kill();
 			
 			save_state = flattened_data.slice(0);
 			
@@ -896,7 +828,6 @@ function player_death() {
 function random_enemy_drop_f_tier() {
 	
 	enemy_random_drop = random_int(3);
-	
 	if (enemy_random_drop == 0) {
 	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
 	} else {
@@ -907,7 +838,6 @@ function random_enemy_drop_f_tier() {
 function random_enemy_drop_d_tier() {
 	
 	enemy_random_drop = random_int(2);
-	
 	if (enemy_random_drop == 0) {
 	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
 	} else {
@@ -922,22 +852,18 @@ function logKey(e) {
 	
 //ESCAPE KEY
 	if (keypress == "Escape") {
-		
 		upgrade_state = 0;
 //MAKE SURE TO USE .SLICE FOR COPIES. ARRAYS ARE REFERENCES, NOT OBJECTS.
 		if (health <= 0) {
 		} else if (pause_state == 0) {
 			
-			sfx_pause1.pause();
-			sfx_pause1.currentTime = 0;
-			sfx_pause1.play();
+			play_sfx_1();
 			
 			save_state = flattened_data.slice(0);
 			
 			for (index = 0; index < room_point_array.length; index++) {
 				flattened_data[room_point_array[index]] = "&emsp14;";
 			}
-			
 			draw_pause_screen();
 			pause_state = 1;
 			draw_screen = 1;
@@ -952,11 +878,9 @@ function logKey(e) {
 			flattened_data = save_state;
 			regenerate_player();
 		}
-		
-		} else if (keypress == "Enter") {
+	} else if (keypress == "Enter") {
 			
-			if (health <= 0) {
-			
+		if (health <= 0) {
 			death_color_interval = setInterval(function() {
 				document.getElementById("game_container").style.color = page_color_live;
 				document.getElementById("health_container").style.color = page_color_live;
@@ -965,151 +889,136 @@ function logKey(e) {
 			sfx_pause2.pause();
 			sfx_pause2.currentTime = 0;
 			sfx_pause2.play();
-				health = 3;
-				max_health = 3;
-				enemy1_health = 0;
-				enemy2_health = 0;
-				enemy3_health = 0;
-				enemy4_health = 0;
-				atk = 1;
-				recovery_amount = 0;
-				cash = 0;
-				new_floor();
-				pause_state = 0;
-				death_state = 0;
-				document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
-				
-				
-				document.getElementById("cash_container").innerHTML = "Cash: 0";
-				document.getElementById("atk_container").innerHTML = "ATK: 1";
-				document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-				document.getElementById("game_container").innerHTML = flattened_data.join("");
-				
-			} else if (pause_state == 1) {
+			health = 3;
+			max_health = 3;
+			enemy1_health = 0;
+			enemy2_health = 0;
+			enemy3_health = 0;
+			enemy4_health = 0;
+			atk = 1;
+			recovery_amount = 0;
+			cash = 0;
+			new_floor();
+			pause_state = 0;
+			death_state = 0;
+			
+			document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
+			document.getElementById("cash_container").innerHTML = "Cash: 0";
+			document.getElementById("atk_container").innerHTML = "ATK: 1";
+			document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+			document.getElementById("game_container").innerHTML = flattened_data.join("");
+			
+		} else if (pause_state == 1) {
 //pause screen select
-				if (upgrade_state != 1) {
-					if (cursor_pos == 32) {
-						if (selected_color == 5) {
-							clearInterval(selected_color_interval);
-						}
-						selected_color += 1;
-						if (selected_color == 6) {
-							selected_color = 0;
-						}
-						random_color = selected_color;
-						page_color();
-					} else if (cursor_pos == 55) {
-						current_floor = 0;
-						health = max_health;
-						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-						new_floor();
-						pause_state = 0;
-						draw_screen = 1;
+			if (upgrade_state != 1) {
+				if (cursor_pos == 32) {
+					if (selected_color == 5) {
+						clearInterval(selected_color_interval);
 					}
-					
+					selected_color += 1;
+					if (selected_color == 6) {
+						selected_color = 0;
+					}
+					random_color = selected_color;
+					page_color();
+				} else if (cursor_pos == 55) {
+					current_floor = 0;
+					health = max_health;
+					document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+					new_floor();
+					pause_state = 0;
+					draw_screen = 1;
+				}
 //upgrade screen select
-				} else if (upgrade_state = 1) {
+			} else if (upgrade_state = 1) {
 //first selection
-					if (cursor_pos == 32) {
-						if (cash - 1 >= 0) {
-							cash--;
-							atk ++;
-							document.getElementById("atk_container").innerHTML = "ATK: " + atk;
-							shake_effect("cash_container");
-							shake_effect("atk_container");
-						}
-						
-//second selection
-					} else if (cursor_pos == 55) {
-						if (cash - 1 >= 0) {
-							cash--;
-							max_health ++;
-							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
-							shake_effect("cash_container");
-							shake_effect("health_container");
-						}
-					} else if (cursor_pos == 78) {
-						if (cash - 1 >= 0) {
-							cash --;
-							recovery_amount ++;
-							document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
-							shake_effect("cash_container");
-							shake_effect("recovery_container");
-						}
-						
+				if (cursor_pos == 32) {
+					if (cash - 1 >= 0) {
+						cash--;
+						atk ++;
+						document.getElementById("atk_container").innerHTML = "ATK: " + atk;
+						shake_effect("cash_container");
+						shake_effect("atk_container");
 					}
-					
-					document.getElementById("cash_container").innerHTML = "Cash: " + cash;
-					
+//second selection
+				} else if (cursor_pos == 55) {
+					if (cash - 1 >= 0) {
+						cash--;
+						max_health ++;
+						document.getElementById("health_container").innerHTML = "Health: " + health + "/" + max_health;
+						shake_effect("cash_container");
+						shake_effect("health_container");
+					}
+				} else if (cursor_pos == 78) {
+					if (cash - 1 >= 0) {
+						cash --;
+						recovery_amount ++;
+						document.getElementById("recovery_container").innerHTML = "Recovery: " + recovery_amount;
+						shake_effect("cash_container");
+						shake_effect("recovery_container");
+					}
 				}
+			document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 			}
-		} else {
+		}
+	} else {
 //D KEY
-			if (keypress == "KeyD") {
-				if (death_state != 1) {
-					
-					d_key_down();
-					draw_screen = 1;
-				}
+		if (keypress == "KeyD") {
+			if (death_state != 1) {
+				d_key_down();
+				draw_screen = 1;
+			}
 //A KEY
-			} else if (keypress == "KeyA") {
-				if (death_state != 1) {
-					a_key_down();
-					draw_screen = 1;
-				}
+		} else if (keypress == "KeyA") {
+			if (death_state != 1) {
+				a_key_down();
+				draw_screen = 1;
+			}
 //S KEY
-			} else if (keypress == "KeyS") {
-				if (death_state != 1) {
-					s_key_down();
-					draw_screen = 1;
-				}
+		} else if (keypress == "KeyS") {
+			if (death_state != 1) {
+				s_key_down();
+				draw_screen = 1;
+			}
 				
 //W KEY
-			} else if (keypress == "KeyW") {
-				if (death_state != 1) {
-					
-					w_key_down();
-					draw_screen = 1;
-				}
+		} else if (keypress == "KeyW") {
+			if (death_state != 1) {
+				w_key_down();
+				draw_screen = 1;
+			}
 //E KEY
-			} else if (keypress == "KeyE") {
-				if (pause_state != 1) {
+		} else if (keypress == "KeyE") {
+			if (pause_state != 1) {
 				if (upgrade_state == 0) {
-						sfx_pause1.pause();
-						sfx_pause1.currentTime = 0;
-						sfx_pause1.play();
-						
-						save_state = flattened_data.slice(0);
-						
-						
-						for (index = 0; index < room_point_array.length; index++) {
-							flattened_data[room_point_array[index]] = "&emsp14;";
-						}
-						
-						draw_upgrade_screen();
-						upgrade_state = 1;
-						pause_state = 1;
-						draw_screen = 1;
-					} else {
-						upgrade_state = 0;
-						regenerate_player();
-						draw_screen = 1;
-						sfx_pause2.pause();
-						sfx_pause2.currentTime = 0;
-						sfx_pause2.play();
-						pause_state = 0;
-						
+					play_sfx_1();
+					
+					save_state = flattened_data.slice(0);
+					
+					for (index = 0; index < room_point_array.length; index++) {
+						flattened_data[room_point_array[index]] = "&emsp14;";
 					}
+					
+					draw_upgrade_screen();
+					upgrade_state = 1;
+					pause_state = 1;
+					draw_screen = 1;
+				} else {
+					upgrade_state = 0;
+					regenerate_player();
+					draw_screen = 1;
+					sfx_pause2.pause();
+					sfx_pause2.currentTime = 0;
+					sfx_pause2.play();
+					pause_state = 0;
 				}
 			}
-			
 		}
+	}
 	if (draw_screen == 1) {
-	
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
 		draw_screen = 0;
 	}
-	
 }//Keypress Bracket
 
 //Random Number Generation
@@ -1136,17 +1045,32 @@ function shake_effect(shake_container) {
 	},30);
 }
 
-
 function spin_effect() {
 	
 	let current_rotation = 0;
 	let inter2 = setInterval(function() {
 		
-		
 		current_rotation += 1;
 		document.getElementById("sprite_p_rotate").style.transform = 'rotate(' + current_rotation + 'deg)';
-		
 	},1);
+}
+
+function play_sfx_1() {
+	pause1.pause();
+	sfx_pause1.currentTime = 0;
+	sfx_pause1.play();
+}
+
+function play_sfx_kill() {
+	sfx_kill1.pause();
+	sfx_kill1.currentTime = 0;
+	sfx_kill1.play();
+}
+
+function play_sfx_hit1() {
+	sfx_hit1.pause();
+	sfx_hit1.currentTime = 0;
+	sfx_hit1.play();
 }
 
 function play_random_walk() {
@@ -1183,49 +1107,38 @@ function draw_pause_screen() {
 	}
 	cursor_pos = 32;
 	prev_cursor = 32;
-	
 	corner_signs();
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
-	//arrays shorten the amount of times i have to type flattened_data
 	let paused_array = ["P", "A", "U", "S", "E", "D"];
-	
 	for (i = 0; i <= 5; i++) {
 		flattened_data[i + 24] = paused_array[i];
 	}
 	
 	let paused_array_set1 = ["C", "O", "L", "O", "R"];
-	
-	
 	for (i = 0; i <= 4; i++) {
 		flattened_data[i + 33] = paused_array_set1[i];
 	}
 	
 	let paused_array_set2 = ["R", "E", "S", "E", "T"];
-	
 	for (i = 0; i <= 4; i++) {
 		flattened_data[i + 56] = paused_array_set2[i];
 	}
-	
 }
 
 function draw_death_screen() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = "&emsp14;";
 	}
-	
 	corner_signs();
 	
-	//arrays shorten the amount of times i have to type flattened_data
 	let death_array = ["Y", "O", "U", "&emsp14;", "D", "I", "E", "D"];
-	
 	for (i = 0; i <= 7; i++) {
 		flattened_data[i + 24] = death_array[i];
 	}
 	
 	let death_array_set1 = ["H", "I", "T", "&emsp14;", "E", "N", "T", "E", "R", "&emsp14;", "T", "O", "&emsp14;", "R", "E", "T", "R", "Y"];
-	
 	for (i = 0; i <= 17; i++) {
 		flattened_data[i + 70] = death_array_set1[i];
 	}
@@ -1237,33 +1150,26 @@ function draw_upgrade_screen() {
 	}
 	cursor_pos = 32;
 	prev_cursor = 32;
-	
 	corner_signs();
 	
 	flattened_data[prev_cursor] = "<div id='sprite_p_rotate'>0</div>";
 	
-	//arrays shorten the amount of times i have to type flattened_data
 	let paused_array = ["U", "P", "G", "R", "A", "D", "E"];
-	
 	for (i = 0; i <= 6; i++) {
 		flattened_data[i + 24] = paused_array[i];
 	}
 	
 	let paused_array_set1 = ["A", "T", "K", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "&emsp14;", "+", "1"];
-	
-	
 	for (i = 0; i <= 10; i++) {
 		flattened_data[i + 33] = paused_array_set1[i];
 	}
 	
 	let paused_array_set2 = ["H", "E", "A", "L", "T", "H", "&emsp14;", "&emsp14;", "&emsp14;", "+", "1"];
-	
 	for (i = 0; i <= 10; i++) {
 		flattened_data[i + 56] = paused_array_set2[i];
 	}
 	
 	let paused_array_set3 = ["R", "E", "C", "O", "V", "E", "R", "Y", "&emsp14;", "+", "1"];
-	
 	for (i = 0; i <= 10; i++) {
 		flattened_data[i + 79] = paused_array_set3[i];
 	}
