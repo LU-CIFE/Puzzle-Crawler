@@ -174,7 +174,7 @@ function page_color() {
 		document.getElementById("link_text").style.color = "orange";
 	} else if(random_color == 2) {
 		document.getElementById("puzzle_crawler").style.color = "#39FF14";
-		document.getElementById("link_text").style.color = "#a39FF14";
+		document.getElementById("link_text").style.color = "#39FF14";
 	} else if(random_color == 3) {
 		document.getElementById("puzzle_crawler").style.color = "white";
 		document.getElementById("link_text").style.color = "white";
