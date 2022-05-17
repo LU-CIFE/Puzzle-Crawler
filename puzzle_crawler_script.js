@@ -1118,7 +1118,7 @@ function logKey(e) {
 								flattened_data[room_point_array[index]] = "&emsp14;";
 							}
 							
-							draw_upgrade_screen();
+							draw_prestige_screen();
 							upgrade_state = 1;
 							pause_state = 1;
 							draw_screen = 1;
