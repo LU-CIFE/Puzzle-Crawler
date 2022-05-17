@@ -200,6 +200,7 @@ body {
 	}
 	
 	#door_open {
+		color:black;
 		display:inline;
 	}
 	
@@ -250,7 +251,6 @@ body {
 	#floor_level {
 		display:inline-block;
 	}
-=======
 	#cash_container {
 	display:inline-block;
 }
