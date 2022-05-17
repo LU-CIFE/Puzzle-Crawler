@@ -42,32 +42,23 @@
 	<!-- Tons of repeating lines, collapse this div. its only here to make the page not flash violently when loaded. -->
 	<div id="game_container">
 	<!-- &emsp14; for empty space				-->
-	<!-- NOT ALWAYS UNIFORM					-->
+	<!-- NOT ALWAYS UNIFORM					    -->
 	<!-- 22 x 11 dots/characters				-->
 	<!-- Stored in nested arrays table_data[] 	-->
-	<!-- Tons of emsp to initialize width and so it doesnt flash upon load. (fit-content issue) -->
+	
+	<!-- only requires width and height so it doesn't flash. -->
 	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
 	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br>			<!-- 1  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 2  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 3  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 4  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 5  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 6  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 7  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 8  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 9  -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 10 -->
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-	&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<br> 			<!-- 11 -->
+	&emsp14;<br> 			<!-- 2  -->
+	&emsp14;<br> 			<!-- 3  -->
+	&emsp14;<br> 			<!-- 4  -->
+	&emsp14;<br> 			<!-- 5  -->
+	&emsp14;<br> 			<!-- 6  -->
+	&emsp14;<br> 			<!-- 7  -->
+	&emsp14;<br> 			<!-- 8  -->
+	&emsp14;<br> 			<!-- 9  -->
+	&emsp14;<br> 			<!-- 10 -->
+	&emsp14;<br> 			<!-- 11 -->
 	</div>
 	
 		<div id="status_container">
@@ -82,52 +73,26 @@
 	<!-- Empty elements so script can use them even when not present.-->
 	<div id="test_div"></div> <!-- Used for testing table data -->
 	
-	<audio id="sfx_1" controls>
-	<source src="audio\pause.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<!-- audio sources -->
 	
-	<audio id="sfx_2" controls>
-	<source src="audio\pause2.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_1" controls><source src="audio\pause.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_3" controls>
-	<source src="audio\kill1.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_2" controls><source src="audio\pause2.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_4" controls>
-	<source src="audio\door.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_3" controls><source src="audio\kill1.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_5" controls>
-	<source src="audio\hit3.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_4" controls><source src="audio\door.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_6" controls>
-	<source src="audio\step1.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_5" controls><source src="audio\hit3.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_7" controls>
-	<source src="audio\step2.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_6" controls><source src="audio\step1.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_8" controls>
-	<source src="audio\step3.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_7" controls><source src="audio\step2.mp3" type="audio/mpeg"></audio>
 	
-	<audio id="sfx_9" controls>
-	<source src="audio\step4.mp3" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
+	<audio id="sfx_8" controls><source src="audio\step3.mp3" type="audio/mpeg"></audio>
+	
+	<audio id="sfx_9" controls><source src="audio\step4.mp3" type="audio/mpeg"></audio>
+	
 </html>
-
-<script src="puzzle_crawler_script.js"></script>
 
 <script src="puzzle_crawler_script.js"></script>
