@@ -27,12 +27,5 @@ function room_logic() {
 	
 	generate_potion(1);
 	generate_cash();
-	
-	
 	current_floor ++;
-	
-	if(reset_state == 1) {
-		reset_state = 0;
-	}
-	
 }
