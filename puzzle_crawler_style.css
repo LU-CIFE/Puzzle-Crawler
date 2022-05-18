@@ -352,20 +352,10 @@ a:visited {
 }
 
 #main_button {
-	margin-right:0;
-	margin-left:auto;
-	text_decoration:none;
-	width:fit-content;
-	heigth:fit-content;
-	padding:5px;
-	border-style:solid;
+	position:absolute;
+	right:0;
 }
 
 #main_button:visited {
-	text_decoration:none;
-	width:fit-content;
-	heigth:fit-content;
-	padding:5px;
-	border-style:solid;
 	
 }
