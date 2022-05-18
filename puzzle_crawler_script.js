@@ -1064,7 +1064,6 @@ function shake_effect(shake_container) {
 	},30);
 }
 
-
 function spin_effect() {
 	
 	let current_rotation = 0;

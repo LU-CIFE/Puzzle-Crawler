@@ -351,3 +351,13 @@ a:visited {
 #link_text {
 	
 }
+
+#main_button {
+	display:inline-block;
+	position: absolute;
+	right:16px;
+	top: 16px;
+	width:fit-content;
+	heigth:fit-content;
+	padding:5px;
+}
