@@ -882,8 +882,7 @@ function logKey(e) {
 							total_atk = prev_player_data[2];
 							total_recovery = prev_player_data[3];
 							cash = prev_player_data[4];
-							
-		
+							current_floor -= 1;
 							
 							
 							new_floor();
