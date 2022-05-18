@@ -354,7 +354,6 @@ a:visited {
 
 #main_button {
 	text_decoration:none;
-	position: relative;
 	right:16px;
 	top:16px;
 	width:fit-content;
