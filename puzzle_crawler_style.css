@@ -352,9 +352,19 @@ a:visited {
 }
 
 #main_button {
+	text_decoration:none;
+	border-style:solid;
 	float:right;
+	top: 5px;
+	padding:6px;
+	font-size:1em;
 }
 
 #main_button:visited {
+	text_decoration:none;
+	border-style:solid;
 	float:right;
+	top: 5px;
+	padding:6px;
+	font-size:1em;
 }
