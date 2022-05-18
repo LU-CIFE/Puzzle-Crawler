@@ -32,7 +32,6 @@ function room_logic() {
 	current_floor ++;
 	
 	if(reset_state == 1) {
-		current_floor --;
 		reset_state = 0;
 	}
 	
