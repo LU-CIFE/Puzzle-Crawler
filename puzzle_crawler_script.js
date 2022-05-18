@@ -72,6 +72,7 @@ var prest_atk = localStorage.getItem('atk_stored');
 var total_max_health = 0;
 var total_atk = 0;
 var total_recovery = 0;
+var prev_player_data = [];
 
 //enemy variables
 var enemy1_health = 4;
@@ -110,6 +111,8 @@ window.onload = function() {
 	total_atk = atk + prest_atk;
 	total_max_health = max_health + prest_max_health;
 	total_recovery = recovery_amount + prest_recovery;
+	
+	prev_player_data = [health, total_max_health, total_atk, total_recovery, cash];
 	
 	document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
 //pushes 22 empty spaces into an array and places a <br> at the end
@@ -695,6 +698,7 @@ function move_cursor(cursor_direction) {
 
 function new_floor() {
 	
+	prev_player_data = [health, total_max_health, total_atk, total_recovery, cash];
 	used_slots = [];
 	room_point_array = [];
 	room1_edges = [];
@@ -865,13 +869,30 @@ function logKey(e) {
 							random_color = selected_color;
 							page_color();
 						} else if (cursor_pos == 55) {
+							
+							reset_state = 1;
 							enter_sfx();
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
-							reset_state = 1;
+							
+							
+							
+							health = prev_player_data[0];
+							total_max_health = prev_player_data[1];
+							total_atk = prev_player_data[2];
+							total_recovery = prev_player_data[3];
+							cash = prev_player_data[4];
+							
+		
+							
+							
 							new_floor();
 							pause_state = 0;
 							draw_screen = 1;
+							document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
+							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
+							document.getElementById("recovery_container").innerHTML = "Recovery: " + total_recovery;
+							document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 						}
 					}
 					
@@ -900,6 +921,7 @@ function logKey(e) {
 							shake_effect("cash_container");
 							shake_effect("health_container");
 						}
+//third selection
 					} else if (cursor_pos == 78) {
 						if (cash - 1 >= 0) {
 							enter_sfx();
@@ -1042,7 +1064,10 @@ function logKey(e) {
 			}
 		}
 	if (draw_screen == 1) {
-	document.getElementById("game_container").innerHTML = flattened_data.join("");
+		document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
+		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
+		document.getElementById("recovery_container").innerHTML = "Recovery: " + total_recovery;
+		document.getElementById("game_container").innerHTML = flattened_data.join("");
 		draw_screen = 0;
 	}
 	
