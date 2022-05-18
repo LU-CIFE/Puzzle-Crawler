@@ -352,10 +352,9 @@ a:visited {
 }
 
 #main_button {
-	position:absolute;
-	right:0;
+	float:right;
 }
 
 #main_button:visited {
-	
+	float:right;
 }
