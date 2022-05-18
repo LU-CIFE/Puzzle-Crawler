@@ -35,6 +35,7 @@ var draw_screen = 0;
 var upgrade_state = 0;
 var death_state = 0;
 var prestige_state = 0;
+var reset_state = 0;
 
 //room generation
 const row_amount = 11;
@@ -867,7 +868,7 @@ function logKey(e) {
 							enter_sfx();
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
-							current_floor --;
+							reset_state = 1;
 							new_floor();
 							pause_state = 0;
 							draw_screen = 1;
