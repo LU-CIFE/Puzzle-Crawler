@@ -806,9 +806,7 @@ function logKey(e) {
 			draw_screen = 1;
 		} else {
 			draw_screen = 1;
-			sfx_pause2.pause();
-			sfx_pause2.currentTime = 0;
-			sfx_pause2.play();
+			enter_sfx();
 			pause_state = 0;
 			
 //restores session and player location
@@ -1109,7 +1107,7 @@ function play_random_walk() {
 function enter_sfx() {
 			sfx_pause2.pause();
 			sfx_pause2.currentTime = 0;
-			sfx_pause2=.play();
+			sfx_pause2.play();
 }
 
 function corner_signs() {
