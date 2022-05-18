@@ -922,7 +922,7 @@ function logKey(e) {
 							health = prev_player_data[0];
 							max_health = prev_player_data[1];
 							atk = prev_player_data[2];
-							recovery = prev_player_data[3];
+							recovery_amount = prev_player_data[3];
 							cash = prev_player_data[4];
 							current_floor -= 1;
 							
