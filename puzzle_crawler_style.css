@@ -354,9 +354,9 @@ a:visited {
 
 #main_button {
 	text_decoration:none;
-	position: absolute;
+	position: relative;
 	right:16px;
-	top: 16px;
+	top:16px;
 	width:fit-content;
 	heigth:fit-content;
 	padding:5px;
@@ -366,9 +366,8 @@ a:visited {
 
 #main_button:visited {
 	text_decoration:none;
-	position: absolute;
 	right:16px;
-	top: 16px;
+	top:16px;
 	width:fit-content;
 	heigth:fit-content;
 	padding:5px;
