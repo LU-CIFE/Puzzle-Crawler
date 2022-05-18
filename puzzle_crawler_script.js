@@ -742,7 +742,7 @@ function move_cursor(cursor_direction) {
 
 function new_floor() {
 	
-	prev_player_data = [health, total_max_health, total_atk, total_recovery, cash];
+	prev_player_data = [health, max_health, atk, recovery_amount, cash];
 	used_slots = [];
 	room_point_array = [];
 	room1_edges = [];
@@ -919,15 +919,16 @@ function logKey(e) {
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 							
-							
-							
 							health = prev_player_data[0];
-							total_max_health = prev_player_data[1];
-							total_atk = prev_player_data[2];
-							total_recovery = prev_player_data[3];
+							max_health = prev_player_data[1];
+							atk = prev_player_data[2];
+							recovery = prev_player_data[3];
 							cash = prev_player_data[4];
 							current_floor -= 1;
 							
+							total_atk = atk + prest_atk;
+							total_max_health = max_health + prest_max_health;
+							total_recovery = recovery_amount + prest_recovery;
 							
 							new_floor();
 							pause_state = 0;
@@ -1110,6 +1111,7 @@ function logKey(e) {
 		document.getElementById("atk_container").innerHTML = "ATK: " + total_atk;
 		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 		document.getElementById("recovery_container").innerHTML = "Recovery: " + total_recovery;
+		document.getElementById("cash_container").innerHTML = "Cash: " + cash;
 		document.getElementById("game_container").innerHTML = flattened_data.join("");
 		draw_screen = 0;
 	}
