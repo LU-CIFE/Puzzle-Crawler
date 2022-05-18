@@ -80,12 +80,14 @@ var enemy2_health = 0;
 var enemy3_health = 0;
 var enemy4_health = 0;
 var enemy5_health = 0;
+var enemy6_health = 0;
 
 var enemy1_atk = 1;
 var enemy2_atk = 2;
 var enemy3_atk = 4;
 var enemy4_atk = 5;
-var enemy5_atk = 7;
+var enemy5_atk = 6;
+var enemy6_atk = 10;
 
 
 //misc
@@ -559,6 +561,28 @@ function generate_enemy(enemy_tier) {
 		used_slots[8] = enemy5_location;
 		flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
 		
+	} else if (enemy_tier == 6) {
+//obtained a random position from the generated room
+	enemy5_health = 17;
+	enemy5_location = random_int(room_point_array.length);
+	
+	
+//prevents enemy5 from spawning on player
+	generation_counter = 0;
+	while (generation_counter != 1) {
+		for (index = 0; index <= used_slots.length; index++) {
+			if (enemy6_location == used_slots[index]) {
+				enemy6_location = random_int(room_point_array.length);
+				generation_counter = 0;
+			} else {
+				generation_counter = 1;
+			}
+		}
+	}
+	
+		used_slots[9] = enemy6_location;
+		flattened_data[room_point_array[enemy5_location]] = "<div id='s_tier'>&</div>";
+		
 	}
 }
 
@@ -603,7 +627,27 @@ function generate_potion(potion_tier) {
 		}
 	}
 		used_slots[8] = potion2_location;
-		flattened_data[room_point_array[potion1_location]] = "<div id='d_tier'>Q</div>";
+		flattened_data[room_point_array[potion2_location]] = "<div id='d_tier'>Q</div>";
+		
+	} else if (potion_tier == 3) {
+	
+//obtained a random position from the generated room
+	potion2_location = random_int(room_point_array.length);
+	
+//prevents potion2 from spawning on player
+	generation_counter = 0;
+	while (generation_counter != 1) {
+		for (index = 0; index <= used_slots.length; index++) {
+			if (potion3_location == used_slots[index]) {
+				potion3_location = random_int(room_point_array.length);
+				generation_counter = 0;
+			} else {
+				generation_counter = 1;
+			}
+		}
+	}
+		used_slots[10] = potion3_location;
+		flattened_data[room_point_array[potion2_location]] = "<div id='c_tier'>Q</div>";
 		
 	}
 	

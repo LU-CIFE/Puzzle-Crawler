@@ -13,12 +13,18 @@ function room_logic() {
 	if (current_floor >= 5) {
 			generate_potion(2);
 	}
-	if (current_floor >= 6) {
+	if (current_floor >= 7) {
 		generate_enemy(4);
 	}
-	if (current_floor >= 8) {
+	if (current_floor >= 9) {
 		generate_enemy(5);
 	}
+	
+	if (current_floor >= 13) {
+		generate_enemy(6);
+	}
+	
+	
 	generate_potion(1);
 	generate_cash();
 	
