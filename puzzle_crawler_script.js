@@ -865,7 +865,6 @@ function logKey(e) {
 							random_color = selected_color;
 							page_color();
 						} else if (cursor_pos == 55) {
-							current_floor --;
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 							new_floor();
