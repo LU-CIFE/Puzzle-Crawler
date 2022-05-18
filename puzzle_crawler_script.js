@@ -855,6 +855,7 @@ function logKey(e) {
 				if (upgrade_state != 1) {
 					if (prestige_state != 1) {
 						if (cursor_pos == 32) {
+							enter_sfx();
 							if (selected_color == 5) {
 								clearInterval(selected_color_interval);
 							}
@@ -865,6 +866,7 @@ function logKey(e) {
 							random_color = selected_color;
 							page_color();
 						} else if (cursor_pos == 55) {
+							enter_sfx();
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
 							current_floor --;
@@ -879,6 +881,7 @@ function logKey(e) {
 //first selection
 					if (cursor_pos == 32) {
 						if (cash - 1 >= 0) {
+							enter_sfx();
 							cash--;
 							atk ++;
 							total_atk = atk + prest_atk;
@@ -890,6 +893,7 @@ function logKey(e) {
 //second selection
 					} else if (cursor_pos == 55) {
 						if (cash - 1 >= 0) {
+							enter_sfx();
 							cash--;
 							max_health ++;
 							total_max_health = max_health + prest_max_health;
@@ -899,6 +903,7 @@ function logKey(e) {
 						}
 					} else if (cursor_pos == 78) {
 						if (cash - 1 >= 0) {
+							enter_sfx();
 							cash --;
 							recovery_amount ++;
 							total_recovery = recovery_amount + prest_recovery;
@@ -1000,9 +1005,7 @@ function logKey(e) {
 						upgrade_state = 0;
 						regenerate_player();
 						draw_screen = 1;
-						sfx_pause2.pause();
-						sfx_pause2.currentTime = 0;
-						sfx_pause2.play();
+						enter_sfx();
 						pause_state = 0;
 					}
 				}
@@ -1031,9 +1034,7 @@ function logKey(e) {
 							prestige_state = 0;
 							regenerate_player();
 							draw_screen = 1;
-							sfx_pause2.pause();
-							sfx_pause2.currentTime = 0;
-							sfx_pause2.play();
+							enter_sfx();
 							pause_state = 0;
 						}
 					}
@@ -1103,6 +1104,12 @@ function play_random_walk() {
 		sfx_step4.currentTime = 0;
 		sfx_step4.play();
 	}
+}
+
+function enter_sfx() {
+			sfx_pause2.pause();
+			sfx_pause2.currentTime = 0;
+			sfx_pause2=.play();
 }
 
 function corner_signs() {
