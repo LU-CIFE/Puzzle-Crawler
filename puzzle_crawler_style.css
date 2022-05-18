@@ -353,9 +353,8 @@ a:visited {
 }
 
 #main_button {
+	position:absolute;
 	text_decoration:none;
-	margin-left: auto; 
-	margin-right: 0;
 	right:16px;
 	top:16px;
 	width:fit-content;
