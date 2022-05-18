@@ -352,7 +352,7 @@ a:visited {
 	
 }
 
-a #main_button {
+#main_button {
 	text_decoration:none;
 	position: absolute;
 	right:16px;
@@ -364,7 +364,7 @@ a #main_button {
 	color:orange;
 }
 
-a #main_button:visited {
+#main_button:visited {
 	text_decoration:none;
 	position: absolute;
 	right:16px;
