@@ -349,29 +349,23 @@ a:visited {
 }
 
 #link_text {
-	
 }
 
 #main_button {
 	position:absolute;
+	float:right;
 	text_decoration:none;
-	right:16px;
-	top:16px;
 	width:fit-content;
 	heigth:fit-content;
 	padding:5px;
 	border-style:solid;
-	color:orange;
 }
 
 #main_button:visited {
 	text_decoration:none;
-	right:16px;
-	top:16px;
 	width:fit-content;
 	heigth:fit-content;
 	padding:5px;
 	border-style:solid;
-	color:orange;
 	
 }
