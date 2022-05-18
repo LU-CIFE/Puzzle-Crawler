@@ -867,6 +867,7 @@ function logKey(e) {
 						} else if (cursor_pos == 55) {
 							health = total_max_health;
 							document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
+							current_floor --;
 							new_floor();
 							pause_state = 0;
 							draw_screen = 1;
