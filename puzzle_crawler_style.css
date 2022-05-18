@@ -352,7 +352,8 @@ a:visited {
 }
 
 #main_button {
-	right:0;
+	margin-right:0;
+	margin-left:auto;
 	text_decoration:none;
 	width:fit-content;
 	heigth:fit-content;
