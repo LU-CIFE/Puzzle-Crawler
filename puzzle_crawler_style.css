@@ -352,8 +352,7 @@ a:visited {
 }
 
 #main_button {
-	position:absolute;
-	float:right;
+	right:0;
 	text_decoration:none;
 	width:fit-content;
 	heigth:fit-content;
