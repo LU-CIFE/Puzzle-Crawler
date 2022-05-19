@@ -522,8 +522,7 @@ function generate_enemy(enemy_tier) {
 	enemy4_health = 12;
 	enemy4_location = random_int(room_point_array.length);
 	
-	
-//prevents enemy4 from spawning on player
+//prevents enemy3 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -541,7 +540,7 @@ function generate_enemy(enemy_tier) {
 		
 	} else if (enemy_tier == 5) {
 //obtained a random position from the generated room
-	enemy5_health = 17;
+	enemy5_health = 16;
 	enemy5_location = random_int(room_point_array.length);
 	
 	
@@ -557,17 +556,16 @@ function generate_enemy(enemy_tier) {
 			}
 		}
 	}
-	
 		used_slots[8] = enemy5_location;
 		flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
 		
 	} else if (enemy_tier == 6) {
 //obtained a random position from the generated room
-	enemy5_health = 17;
-	enemy5_location = random_int(room_point_array.length);
+	enemy6_health = 20;
+	enemy6_location = random_int(room_point_array.length);
 	
 	
-//prevents enemy5 from spawning on player
+//prevents enemy6 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -741,13 +739,17 @@ function move_cursor(cursor_direction) {
 
 
 function new_floor() {
-	
 	prev_player_data = [health, max_health, atk, recovery_amount, cash];
 	used_slots = [];
 	room_point_array = [];
 	room1_edges = [];
 	
-	enemy1_health = 4;
+	enemy1_health = 0;
+	enemy2_health = 0;
+	enemy3_health = 0;
+	enemy4_health = 0;
+	enemy5_health = 0;
+	enemy6_health = 0;
 //flattens and joins the data
 	flattened_data = table_data.flat();
 	
@@ -924,6 +926,12 @@ function logKey(e) {
 							atk = prev_player_data[2];
 							recovery_amount = prev_player_data[3];
 							cash = prev_player_data[4];
+							enemy1_health = 0;
+							enemy2_health = 0;
+							enemy3_health = 0;
+							enemy4_health = 0;
+							enemy5_health = 0;
+							enemy6_health = 0;
 							current_floor --;
 							
 							total_atk = atk + prest_atk;
