@@ -87,7 +87,7 @@ var enemy2_atk = 2;
 var enemy3_atk = 4;
 var enemy4_atk = 5;
 var enemy5_atk = 6;
-var enemy6_atk = 10;
+var enemy6_atk = 8;
 
 
 //misc
@@ -522,7 +522,7 @@ function generate_enemy(enemy_tier) {
 	enemy4_health = 12;
 	enemy4_location = random_int(room_point_array.length);
 	
-//prevents enemy3 from spawning on player
+//prevents enemy4 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -561,7 +561,7 @@ function generate_enemy(enemy_tier) {
 		
 	} else if (enemy_tier == 6) {
 //obtained a random position from the generated room
-	enemy6_health = 20;
+	enemy6_health = 18;
 	enemy6_location = random_int(room_point_array.length);
 	
 	
@@ -630,9 +630,9 @@ function generate_potion(potion_tier) {
 	} else if (potion_tier == 3) {
 	
 //obtained a random position from the generated room
-	potion2_location = random_int(room_point_array.length);
+	potion3_location = random_int(room_point_array.length);
 	
-//prevents potion2 from spawning on player
+//prevents potion3 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
 		for (index = 0; index <= used_slots.length; index++) {
@@ -645,7 +645,7 @@ function generate_potion(potion_tier) {
 		}
 	}
 		used_slots[10] = potion3_location;
-		flattened_data[room_point_array[potion2_location]] = "<div id='c_tier'>Q</div>";
+		flattened_data[room_point_array[potion3_location]] = "<div id='c_tier'>Q</div>";
 		
 	}
 	
@@ -739,6 +739,7 @@ function move_cursor(cursor_direction) {
 
 
 function new_floor() {
+	flattened_data = [];
 	prev_player_data = [health, max_health, atk, recovery_amount, cash];
 	used_slots = [];
 	room_point_array = [];
