@@ -43,17 +43,6 @@ function check_tile() {
 		
 		play_random_walk();
 		move_player();
-	 else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='c_tier'>Q</div>") {
-		health += 7 + total_recovery;
-		
-		if (health > total_max_health) {
-			health = total_max_health;
-		}
-		
-		document.getElementById("health_container").innerHTML = "Health: " + health + "/" + total_max_health;
-		
-		play_random_walk();
-		move_player();
 	} else if (flattened_data[room_point_array[player_array_pos] + player_direction] == "<div id='f_tier'>&</div>") {
 		
 		if (random_int(2) == 0) {
