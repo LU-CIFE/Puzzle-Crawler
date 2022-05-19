@@ -24,6 +24,7 @@ var used_slots = [];
 
 //Color parameters
 var random_color = random_int(5);
+var selected_color = 0;
 var r = 255;
 var g = 0;
 var b = 255;
@@ -88,9 +89,6 @@ var enemy3_atk = 4;
 var enemy4_atk = 5;
 var enemy5_atk = 6;
 var enemy6_atk = 8;
-
-//misc
-var selected_color = 0;
 
 window.onload = function() {
 //sets page_color in an interval for when the player dies
