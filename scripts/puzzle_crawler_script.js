@@ -89,7 +89,6 @@ var enemy4_atk = 5;
 var enemy5_atk = 6;
 var enemy6_atk = 8;
 
-
 //misc
 var selected_color = 0;
 
@@ -166,7 +165,6 @@ window.onload = function() {
 	new_floor();
 	spin_effect();
 	
-	document.getElementById("title_tab").innerHTML= "Floor: " + current_floor;
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
 } //onload bracket
 
@@ -247,14 +245,11 @@ function generate_room(hall_value) {
 			generate_upside_room();
 		}
 	}
-	
 	room_state.push(room_point_array);
 	room_state.flat();
-	
 //removes duped entries
 	room_state.concat(room_state);
 	room_point_array.concat(room_point_array);
-	
 }
 
 function generate_first_normal_room() {
@@ -262,13 +257,11 @@ function generate_first_normal_room() {
 	//Now we need to generate the room width, which is very easy. 
 	room_width_r1 = random_int(4);
 	room_width_r1 += 2;
-	
 	width_end_point = start_point + room_width_r1;
 	
 	//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -282,7 +275,6 @@ function generate_first_normal_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
@@ -290,17 +282,14 @@ function generate_first_normal_room() {
 	});
 
 }function generate_normal_room() {
-	
 	//Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
-	
 	width_end_point = start_point + room_width_r1;
 	
 	//The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 	//Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -314,27 +303,22 @@ function generate_first_normal_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort( function( a , b){
 		if(a > b) return 1;
 		if(a < b) return -1;
 		return 0;
 	});
-	
 }
 
 function generate_upside_room() {
-	
 //Now we need to generate the room width, which is very easy. 
 	room_width = random_int(4);
 	room_width += 2;
-	
 	width_end_point = start_point + room_width;
 	
 //The room height is much more complex though.
 	room_height = random_int(4);
 	room_height += 2;
-	
 	height_end_point = start_point + room_height;
 	
 //Now we have kind of an upside down L shape, now it just needs to be filled in!
@@ -346,7 +330,6 @@ function generate_upside_room() {
 		recurse_fill += 23;
 	}
 //No clue why this works
-	
 	room_point_array.sort(function(a,b) {
 		return b - a;
 	});
@@ -453,7 +436,6 @@ function generate_door() {
 function generate_enemy(enemy_tier) {
 
 	if (enemy_tier == 1) {
-		
 //obtained a random position from the generated room
 	enemy1_health = 4;
 	enemy1_location = random_int(room_point_array.length);
@@ -478,7 +460,6 @@ function generate_enemy(enemy_tier) {
 	enemy2_health = 7;
 	enemy2_location = random_int(room_point_array.length);
 	
-	
 //prevents enemy2 from spawning on player
 	generation_counter = 0;
 	while (generation_counter != 1) {
@@ -496,7 +477,6 @@ function generate_enemy(enemy_tier) {
 		flattened_data[room_point_array[enemy2_location]] = "<div id='d_tier'>&</div>";
 		
 	} else if (enemy_tier == 3) {
-	
 //obtained a random position from the generated room
 	enemy3_health = 10;
 	enemy3_location = random_int(room_point_array.length);
@@ -514,8 +494,8 @@ function generate_enemy(enemy_tier) {
 		}
 	}
 	
-		used_slots[6] = enemy3_location;
-		flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
+	used_slots[6] = enemy3_location;
+	flattened_data[room_point_array[enemy3_location]] = "<div id='c_tier'>&</div>";
 		
 	} else if (enemy_tier == 4) {
 //obtained a random position from the generated room
@@ -534,15 +514,13 @@ function generate_enemy(enemy_tier) {
 			}
 		}
 	}
-	
-		used_slots[7] = enemy4_location;
-		flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
+	used_slots[7] = enemy4_location;
+	flattened_data[room_point_array[enemy4_location]] = "<div id='b_tier'>&</div>";
 		
 	} else if (enemy_tier == 5) {
 //obtained a random position from the generated room
 	enemy5_health = 16;
 	enemy5_location = random_int(room_point_array.length);
-	
 	
 //prevents enemy5 from spawning on player
 	generation_counter = 0;
@@ -556,14 +534,13 @@ function generate_enemy(enemy_tier) {
 			}
 		}
 	}
-		used_slots[8] = enemy5_location;
-		flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
+	used_slots[8] = enemy5_location;
+	flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
 		
 	} else if (enemy_tier == 6) {
 //obtained a random position from the generated room
 	enemy6_health = 18;
 	enemy6_location = random_int(room_point_array.length);
-	
 	
 //prevents enemy6 from spawning on player
 	generation_counter = 0;
@@ -577,17 +554,14 @@ function generate_enemy(enemy_tier) {
 			}
 		}
 	}
-	
-		used_slots[9] = enemy6_location;
-		flattened_data[room_point_array[enemy5_location]] = "<div id='s_tier'>&</div>";
-		
+	used_slots[9] = enemy6_location;
+	flattened_data[room_point_array[enemy5_location]] = "<div id='s_tier'>&</div>";
 	}
 }
 
 function generate_potion(potion_tier) {
 	
 	if (potion_tier == 1) {
-	
 //obtained a random position from the generated room
 	potion1_location = random_int(room_point_array.length);
 	
@@ -603,12 +577,10 @@ function generate_potion(potion_tier) {
 			}
 		}
 	}
-	
-		used_slots[3] = potion1_location;
-		flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
+	used_slots[3] = potion1_location;
+	flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
 		
 	} else if (potion_tier == 2) {
-	
 //obtained a random position from the generated room
 	potion2_location = random_int(room_point_array.length);
 	
@@ -624,11 +596,11 @@ function generate_potion(potion_tier) {
 			}
 		}
 	}
-		used_slots[8] = potion2_location;
-		flattened_data[room_point_array[potion2_location]] = "<div id='d_tier'>Q</div>";
+	used_slots[8] = potion2_location;
+	flattened_data[room_point_array[potion2_location]] = "<div id='d_tier'>Q</div>";
 		
 	} else if (potion_tier == 3) {
-	
+
 //obtained a random position from the generated room
 	potion3_location = random_int(room_point_array.length);
 	
@@ -644,14 +616,10 @@ function generate_potion(potion_tier) {
 			}
 		}
 	}
-		used_slots[10] = potion3_location;
-		flattened_data[room_point_array[potion3_location]] = "<div id='c_tier'>Q</div>";
-		
+	used_slots[10] = potion3_location;
+	flattened_data[room_point_array[potion3_location]] = "<div id='c_tier'>Q</div>";
 	}
-	
 }
-
-
 
 function generate_cash() {
 //obtained a random position from the generated room
@@ -663,10 +631,9 @@ function generate_cash() {
 			cash1_location = random_int(room_point_array.length);
 		}
 	}
-		used_slots[4] = cash1_location;
-		flattened_data[room_point_array[cash1_location]] = "<div id='f_tier'>$</div>";
+	used_slots[4] = cash1_location;
+	flattened_data[room_point_array[cash1_location]] = "<div id='f_tier'>$</div>";
 }
-
 
 //KEYPRESS FUNCTIONS
 
@@ -686,7 +653,6 @@ function a_key_down() {
 	}
 }
 
-
 function s_key_down() {
 		document.getElementById("user_alert").innerHTML = "";
 	if (pause_state != 1) {
@@ -695,7 +661,6 @@ function s_key_down() {
 	} else {
 		move_cursor("down");
 	}
-	
 }
 
 function w_key_down() {
@@ -706,7 +671,6 @@ function w_key_down() {
 	} else {
 		move_cursor("up");
 	}
-	
 }
 
 function move_cursor(cursor_direction) {
@@ -715,28 +679,21 @@ function move_cursor(cursor_direction) {
 	if (cursor_direction == "up") {
 		
 		if (!(cursor_pos - 23 <= 9)) {
-			
 			cursor_pos -= 23;
 		
 			flattened_data[prev_cursor] = "&emsp14;";
 			flattened_data[cursor_pos] = "<div id='sprite_p_rotate'>0</div>";
-		
 		}
 	} else {
 		
 		if (!(cursor_pos + 23 >= 146)) {
-			
 			cursor_pos +=23;
 			
 			flattened_data[prev_cursor] = "&emsp14;";
 			flattened_data[cursor_pos] = "<div id='sprite_p_rotate'>0</div>";
-		
 		}
-		
 	}
-	
 }
-
 
 function new_floor() {
 	flattened_data = [];
@@ -761,7 +718,6 @@ function new_floor() {
 	for (index = 0; index < room_point_array.length; index++) {
 		flattened_data[room_point_array[index]] = ".";
 	}
-	
 	room_logic();
 	
 	if (current_floor >= highscore) {
@@ -796,7 +752,6 @@ function player_death() {
 			clearInterval(death_color_interval);
 			pause_state = 1;
 			death_state = 1;
-			document.getElementById("title_tab").innerHTML= "You Died!";
 			draw_death_screen();
 			
 			if (current_floor >= highscore) {
@@ -870,14 +825,14 @@ function logKey(e) {
 			
 			if (health <= 0) {
 			
-			death_color_interval = setInterval(function() {
-				document.getElementById("game_container").style.color = page_color_live;
-				document.getElementById("health_container").style.color = page_color_live;
-			}, 1);
+				death_color_interval = setInterval(function() {
+					document.getElementById("game_container").style.color = page_color_live;
+					document.getElementById("health_container").style.color = page_color_live;
+				}, 1);
 				
-			sfx_pause2.pause();
-			sfx_pause2.currentTime = 0;
-			sfx_pause2.play();
+				sfx_pause2.pause();
+				sfx_pause2.currentTime = 0;
+				sfx_pause2.play();
 				health = 3;
 				max_health = 3;
 				enemy1_health = 0;
@@ -890,7 +845,6 @@ function logKey(e) {
 				new_floor();
 				pause_state = 0;
 				death_state = 0;
-				document.getElementById("title_tab").innerHTML= "Floor " + current_floor;
 				
 				total_atk = atk + prest_atk;
 				total_max_health = max_health + prest_max_health;
@@ -962,7 +916,6 @@ function logKey(e) {
 							shake_effect("cash_container");
 							shake_effect("atk_container");
 						}
-						
 //second selection
 					} else if (cursor_pos == 55) {
 						if (cash - 1 >= 0) {
@@ -985,7 +938,6 @@ function logKey(e) {
 							shake_effect("cash_container");
 							shake_effect("recovery_container");
 						}
-						
 					}
 					
 					document.getElementById("cash_container").innerHTML = "Cash: " + cash;
@@ -1002,7 +954,6 @@ function logKey(e) {
 							shake_effect("cash_container");
 							shake_effect("atk_container");
 						}
-						
 //second selection
 					} else if (cursor_pos == 55) {
 						if (cash - 1 >= 0) {
@@ -1032,7 +983,6 @@ function logKey(e) {
 //D KEY
 			if (keypress == "KeyD") {
 				if (death_state != 1) {
-					
 					d_key_down();
 					draw_screen = 1;
 				}
@@ -1052,7 +1002,6 @@ function logKey(e) {
 //W KEY
 			} else if (keypress == "KeyW") {
 				if (death_state != 1) {
-					
 					w_key_down();
 					draw_screen = 1;
 				}
@@ -1065,7 +1014,6 @@ function logKey(e) {
 						sfx_pause1.play();
 						
 						save_state = flattened_data.slice(0);
-						
 						
 						for (index = 0; index < room_point_array.length; index++) {
 							flattened_data[room_point_array[index]] = "&emsp14;";
@@ -1156,10 +1104,8 @@ function spin_effect() {
 	let current_rotation = 0;
 	let inter2 = setInterval(function() {
 		
-		
 		current_rotation += 1;
 		document.getElementById("sprite_p_rotate").style.transform = 'rotate(' + current_rotation + 'deg)';
-		
 	},1);
 }
 
@@ -1185,9 +1131,9 @@ function play_random_walk() {
 }
 
 function enter_sfx() {
-			sfx_pause2.pause();
-			sfx_pause2.currentTime = 0;
-			sfx_pause2.play();
+	sfx_pause2.pause();
+	sfx_pause2.currentTime = 0;
+	sfx_pause2.play();
 }
 
 function corner_signs() {
