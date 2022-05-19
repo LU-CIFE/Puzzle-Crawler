@@ -234,26 +234,26 @@ body {
 		right: 5%;
 	}
 	
-	#door_locked {
-		display: inline;
-		color:#C4A484;
-	}
+#door_locked {
+	display: inline;
+	color:#C4A484;
+}
 	
-	#cash_container {
-		display:inline-block;
-	}
+#cash_container {
+	display:inline-block;
+}
 	
-	#atk_container {
-		display: inline-block;
-	}
-	#recovery_container {
-		display: inline-block;
-	}
-	
-	#floor_level {
-		display:inline-block;
-	}
-	#cash_container {
+#atk_container {
+	display: inline-block;
+}
+#recovery_container {
+	display: inline-block;
+}
+
+#floor_level {
+	display:inline-block;
+}
+#cash_container {
 	display:inline-block;
 }
 
