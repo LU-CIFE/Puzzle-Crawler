@@ -1,4 +1,5 @@
 # ＰＵＺＺＬΣ | ＣＲΛＷＬΣＲ
+![ezgif-4-d6f6e972bc](https://user-images.githubusercontent.com/62038653/169381111-5a951a3f-d3ac-488b-ae21-ee65abae449a.gif)
 ## A simple JS/HTML text-based game I made over the weekend.
 
 Game can be accessed publicly at `lu-sife.github.io/Puzzle-Crawler/`.
@@ -9,6 +10,7 @@ Game can be accessed publicly at `lu-sife.github.io/Puzzle-Crawler/`.
 ## PAUSE MENU
 
 Hit `Esc` to pause the game.
+
 Use `W` & `S` to select an option, and `Enter` to confirm.
 Hit `Esc` to resume.
 
