@@ -76,6 +76,7 @@ var total_recovery = 0;
 var prev_player_data = [];
 
 //enemy variables
+var enemy_spawnable = 0;
 var enemy1_health = 4;
 var enemy2_health = 0;
 var enemy3_health = 0;
@@ -100,6 +101,7 @@ window.onload = function() {
 	death_color_interval = setInterval(function() {
 		document.getElementById("game_container").style.color = page_color_live;
 		document.getElementById("health_container").style.color = page_color_live;
+		document.getElementById("s_tier").style.color = color_cycle;
 	}, 1);
 //sets variables if page never visited
 	if (highscore == null) {highscore = 0;}
@@ -199,6 +201,7 @@ function page_color() {
 			
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
 				document.getElementById("link_text").style.color = color_cycle;
+				document.getElementById("s_tier").style.color = color_cycle;
 				document.getElementById("main_button").style.color = color_cycle;
 				document.getElementById("game_container").style.color = document.getElementById("puzzle_crawler").style.color;
 				document.getElementById("health_container").style.color = document.getElementById("puzzle_crawler").style.color;
@@ -214,6 +217,7 @@ function page_color() {
 	} else if (random_color == 5) {
 		selected_color_interval = setInterval(function() { //needs an interval to work
 				document.getElementById("puzzle_crawler").style.color = color_cycle;
+				document.getElementById("s_tier").style.color = color_cycle;
 				document.getElementById("link_text").style.color = color_cycle;
 				document.getElementById("main_button").style.color = color_cycle;
 		},1);
@@ -413,22 +417,15 @@ function generate_door() {
 		} else {
 			door_spawnable = 1;
 		}
-	}
-	
-//prevents door from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (door_location == used_slots[index]) {
-				door_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
+		
+		if (door_spawnable == 1) {
+			if (flattened_data[room_point_array[door_location]] != ".") {
+				door_spawnable = 0;
 			}
 		}
 	}
-		used_slots[1] = door_location;
-		flattened_data[room_point_array[door_location]] = "<div id='door_locked'>#</div>";
+	used_slots[1] = door_location;
+	flattened_data[room_point_array[door_location]] = "<div id='door_locked'>#</div>";
 }
 
 function generate_enemy(enemy_tier) {
@@ -439,15 +436,12 @@ function generate_enemy(enemy_tier) {
 	enemy1_location = random_int(room_point_array.length);
 	
 //prevents enemy1 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy1_location == used_slots[index]) {
-				enemy1_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy1_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy1_location = random_int(room_point_array.length);
 		}
 	}
 		used_slots[2] = enemy1_location;
@@ -459,18 +453,14 @@ function generate_enemy(enemy_tier) {
 	enemy2_location = random_int(room_point_array.length);
 	
 //prevents enemy2 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy2_location == used_slots[index]) {
-				enemy2_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy2_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy2_location = random_int(room_point_array.length);
 		}
 	}
-	
 		used_slots[5] = enemy2_location;
 		flattened_data[room_point_array[enemy2_location]] = "<div id='d_tier'>&</div>";
 		
@@ -480,15 +470,12 @@ function generate_enemy(enemy_tier) {
 	enemy3_location = random_int(room_point_array.length);
 	
 //prevents enemy3 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy3_location == used_slots[index]) {
-				enemy3_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy3_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy3_location = random_int(room_point_array.length);
 		}
 	}
 	
@@ -501,15 +488,12 @@ function generate_enemy(enemy_tier) {
 	enemy4_location = random_int(room_point_array.length);
 	
 //prevents enemy4 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy4_location == used_slots[index]) {
-				enemy4_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy4_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy4_location = random_int(room_point_array.length);
 		}
 	}
 	used_slots[7] = enemy4_location;
@@ -521,17 +505,15 @@ function generate_enemy(enemy_tier) {
 	enemy5_location = random_int(room_point_array.length);
 	
 //prevents enemy5 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy5_location == used_slots[index]) {
-				enemy5_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy5_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy5_location = random_int(room_point_array.length);
 		}
 	}
+	
 	used_slots[8] = enemy5_location;
 	flattened_data[room_point_array[enemy5_location]] = "<div id='a_tier'>&</div>";
 		
@@ -541,15 +523,12 @@ function generate_enemy(enemy_tier) {
 	enemy6_location = random_int(room_point_array.length);
 	
 //prevents enemy6 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (enemy6_location == used_slots[index]) {
-				enemy6_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[enemy6_location]] == ".") {
+			spawnable = 1;
+		} else {
+			enemy6_location = random_int(room_point_array.length);
 		}
 	}
 	used_slots[9] = enemy6_location;
@@ -564,17 +543,15 @@ function generate_potion(potion_tier) {
 	potion1_location = random_int(room_point_array.length);
 	
 //prevents potion1 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (potion1_location == used_slots[index]) {
-				potion1_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[potion1_location]] == ".") {
+			spawnable = 1;
+		} else {
+			potion1_location = random_int(room_point_array.length);
 		}
 	}
+	
 	used_slots[3] = potion1_location;
 	flattened_data[room_point_array[potion1_location]] = "<div id='f_tier'>Q</div>";
 		
@@ -583,15 +560,12 @@ function generate_potion(potion_tier) {
 	potion2_location = random_int(room_point_array.length);
 	
 //prevents potion2 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (potion2_location == used_slots[index]) {
-				potion2_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[potion2_location]] == ".") {
+			spawnable = 1;
+		} else {
+			potion2_location = random_int(room_point_array.length);
 		}
 	}
 	used_slots[8] = potion2_location;
@@ -603,15 +577,12 @@ function generate_potion(potion_tier) {
 	potion3_location = random_int(room_point_array.length);
 	
 //prevents potion3 from spawning on player
-	generation_counter = 0;
-	while (generation_counter != 1) {
-		for (index = 0; index <= used_slots.length; index++) {
-			if (potion3_location == used_slots[index]) {
-				potion3_location = random_int(room_point_array.length);
-				generation_counter = 0;
-			} else {
-				generation_counter = 1;
-			}
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[potion3_location]] == ".") {
+			spawnable = 1;
+		} else {
+			potion3_location = random_int(room_point_array.length);
 		}
 	}
 	used_slots[10] = potion3_location;
@@ -624,8 +595,11 @@ function generate_cash() {
 	cash1_location = random_int(room_point_array.length);
 	
 //prevents door from spawning on player
-	for (i = 0; i <= used_slots.length; i++) {
-		if (cash1_location == used_slots[i]) {
+	spawnable = 0;
+	while (spawnable == 0) {
+		if (flattened_data[room_point_array[cash1_location]] == ".") {
+			spawnable = 1;
+		} else {
 			cash1_location = random_int(room_point_array.length);
 		}
 	}
