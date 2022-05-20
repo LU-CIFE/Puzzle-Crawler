@@ -532,7 +532,7 @@ function generate_enemy(enemy_tier) {
 		}
 	}
 	used_slots[9] = enemy6_location;
-	flattened_data[room_point_array[enemy5_location]] = "<div id='s_tier'>&</div>";
+	flattened_data[room_point_array[enemy6_location]] = "<div id='s_tier'>&</div>";
 	}
 }
 
