@@ -1,5 +1,7 @@
-function check_tile() {
+function check_tile(player_direction) {
+	move_direction = player_direction;
 	document.getElementById("user_alert").style.visibility = "hidden";
+	document.getElementById("user_alert").innerHTML = "";
 	
 	if (flattened_data[room_point_array[player_array_pos] + player_direction] == ".") {
 		
@@ -12,6 +14,7 @@ function check_tile() {
 			flattened_data[room_point_array[player_array_pos] + player_direction] = '<div id="door_open">_</div>';
 		} else {
 			document.getElementById("user_alert").style.visibility = "visible";
+			shake_effect("user_alert");
 			document.getElementById("user_alert").innerHTML = "Locked!";
 		}
 	

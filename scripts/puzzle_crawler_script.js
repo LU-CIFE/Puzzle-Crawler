@@ -1,3 +1,5 @@
+console.log("danger zones: 23 46 69 92 115 138");
+
 //HTML elements
 var game_container = document.getElementById('game_container');
 var page_color_live = document.getElementById("puzzle_crawler").style.color;
@@ -52,20 +54,20 @@ var room_width_end_point = 0;
 var recurse_fill = 0;
 var room_build_check = 0;
 var random_room_gen = 0;
-var room1_edges = [];
 var hall1_length = 0;
 var room_width_r1 = 0;
 var door_spawnable = 0;
+var room1_edges = [];
 
 //player variables
-var player_direction = 0;
+var move_direction = 0;
 var player_array_pos = 0;
 var prev_player_pos = 0;
 var current_floor = 0;
 var recovery_amount = 0;
+var cash = 0;
 var max_health = 3;
 var health = 3;
-var cash = 0;
 var atk = 1;
 var prest_recovery = localStorage.getItem('recovery_stored');
 var prest_max_health = localStorage.getItem('max_health_stored');
@@ -76,8 +78,9 @@ var total_recovery = 0;
 var prev_player_data = [];
 
 //enemy variables
+
 var enemy_spawnable = 0;
-var enemy1_health = 4;
+var enemy1_health = 0;
 var enemy2_health = 0;
 var enemy3_health = 0;
 var enemy4_health = 0;
@@ -163,7 +166,7 @@ window.onload = function() {
 	},1);
 	
 	new_floor();
-	spin_effect();
+	spin_effect("sprite_p_rotate");
 	
 	document.getElementById("game_container").innerHTML = flattened_data.join("");
 } //onload bracket
@@ -227,31 +230,56 @@ function page_color() {
 //Random World Gen (oh god)
 function generate_room(hall_value) {
 	
-	random_room_gen = random_int(6);
+	random_room_gen = 47 + random_int(8);
 //Beutifully efficient
-	if (random_room_gen <= 2) {
-		random_room_gen += 47;
-	} else {
-		random_room_gen += 67;
-	}
 	
 	if (hall_value != 1) {
-	start_point = random_room_gen;
+		start_point = random_room_gen;
+		console.log("Room 1 start point: " + start_point);
 		generate_first_normal_room();
 	} else {
 		start_point = room1_edges[hall1_position] + hall1_length;
-		
+		console.log("Room 2 start point: " + start_point);
 		if (start_point <= 100) {
 			generate_normal_room();
 		} else {
 			generate_upside_room();
 		}
 	}
+
+
 	room_state.push(room_point_array);
 	room_state.flat();
 //removes duped entries
 	room_state.concat(room_state);
 	room_point_array.concat(room_point_array);
+}
+
+function generate_outcrop() {
+	for (i = 0; i <= room_point_array.length - 1; i++) {
+		if (!((room_point_array[i] + 1) % 23 >= 20)) {
+			if (random_int(8) == 0) {
+				room_point_array.push(room_point_array[i] + 1);
+				console.log(room_point_array.push(room_point_array[i] + 1));
+			}
+		}
+
+		if (!((room_point_array[i] - 1) % 23 >= 20)) {
+			if (random_int(8) == 0) {
+				room_point_array.push(room_point_array[i] - 1);
+				console.log(room_point_array.push(room_point_array[i] - 1));
+			}
+		}
+
+
+		room_point_array.sort( function( a , b){
+		if(a > b) return 1;
+		if(a < b) return -1;
+		return 0;
+		});
+	}
+
+	
 }
 
 function generate_first_normal_room() {
@@ -368,6 +396,7 @@ function generate_hall() {
 		return 0;
 	});
 	generate_room(1);
+	generate_outcrop();
 }
 
 //ELEMENT GENERATION
@@ -611,35 +640,27 @@ function generate_cash() {
 
 function d_key_down() {
 	if (pause_state != 1) {
-		document.getElementById("user_alert").innerHTML = "";
-		player_direction = 1;
-		check_tile();
+		check_tile(1);
 	}
 }
 
 function a_key_down() {
 	if (pause_state != 1) {
-		document.getElementById("user_alert").innerHTML = "";
-		player_direction = -1;
-		check_tile();
+		check_tile(-1);
 	}
 }
 
 function s_key_down() {
-		document.getElementById("user_alert").innerHTML = "";
 	if (pause_state != 1) {
-		player_direction = 23;
-		check_tile();
+		check_tile(23);
 	} else {
 		move_cursor("down");
 	}
 }
 
 function w_key_down() {
-		document.getElementById("user_alert").innerHTML = "";
 	if (pause_state != 1) {
-		player_direction = -23;
-		check_tile();
+		check_tile(-23);
 	} else {
 		move_cursor("up");
 	}
@@ -702,7 +723,7 @@ function new_floor() {
 //moves the player if check_tile saw the tile was free or there was potion/cash
 function move_player () {
 	flattened_data[room_point_array[player_array_pos]] = ".";
-	player_array_pos = room_point_array.indexOf(room_point_array[player_array_pos] + player_direction);
+	player_array_pos = room_point_array.indexOf(room_point_array[player_array_pos] + move_direction);
 	regenerate_player();
 }
 
@@ -739,9 +760,9 @@ function random_enemy_drop_f_tier() {
 	enemy_random_drop = random_int(3);
 	
 	if (enemy_random_drop == 0) {
-	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+	flattened_data[room_point_array[player_array_pos] + move_direction] = "<div id='f_tier'>Q</div>";
 	} else {
-	flattened_data[room_point_array[player_array_pos] + player_direction] = ".";
+	flattened_data[room_point_array[player_array_pos] + move_direction] = ".";
 	}
 }
 
@@ -750,9 +771,9 @@ function random_enemy_drop_d_tier() {
 	enemy_random_drop = random_int(2);
 	
 	if (enemy_random_drop == 0) {
-	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='d_tier'>Q</div>";
+	flattened_data[room_point_array[player_array_pos] + move_direction] = "<div id='d_tier'>Q</div>";
 	} else {
-	flattened_data[room_point_array[player_array_pos] + player_direction] = "<div id='f_tier'>Q</div>";
+	flattened_data[room_point_array[player_array_pos] + move_direction] = "<div id='f_tier'>Q</div>";
 	}
 }
 
@@ -1071,34 +1092,38 @@ function shake_effect(shake_container) {
 	},30);
 }
 
-function spin_effect() {
+function spin_effect(el) {
 	
 	let current_rotation = 0;
 	let inter2 = setInterval(function() {
 		
 		current_rotation += 1;
-		document.getElementById("sprite_p_rotate").style.transform = 'rotate(' + current_rotation + 'deg)';
+		document.getElementById(el).style.transform = 'rotate(' + current_rotation + 'deg)';
 	},1);
 }
 
 function play_random_walk() {
-	var random_sound = random_int(4);
-	if (random_sound == 0) {
-		sfx_step1.pause();
-		sfx_step1.currentTime = 0;
-		sfx_step1.play();
-	} else  if (random_sound == 1) {
-		sfx_step2.pause();
-		sfx_step2.currentTime = 0;
-		sfx_step2.play();
-	} else  if (random_sound == 2) {
-		sfx_step3.pause();
-		sfx_step3.currentTime = 0;
-		sfx_step3.play();
-	} else  if (random_sound == 3) {
-		sfx_step4.pause();
-		sfx_step4.currentTime = 0;
-		sfx_step4.play();
+	switch (random_int(4)) {
+		case 0:
+			sfx_step1.pause();
+			sfx_step1.currentTime = 0;
+			sfx_step1.play();
+		break;
+		case 1:
+			sfx_step2.pause();
+			sfx_step2.currentTime = 0;
+			sfx_step2.play();
+		break;
+		case 2:
+			sfx_step3.pause();
+			sfx_step3.currentTime = 0;
+			sfx_step3.play();
+		break;
+		case 3:
+			sfx_step4.pause();
+			sfx_step4.currentTime = 0;
+			sfx_step4.play();
+		break;
 	}
 }
 
