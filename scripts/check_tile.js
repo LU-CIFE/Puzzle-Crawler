@@ -1,4 +1,5 @@
 function check_tile() {
+	document.getElementById("user_alert").style.visibility = "hidden";
 	
 	if (flattened_data[room_point_array[player_array_pos] + player_direction] == ".") {
 		
@@ -10,6 +11,7 @@ function check_tile() {
 		if (enemy1_health <= 0 && enemy2_health <= 0 && enemy3_health <= 0 && enemy4_health <= 0 && enemy5_health <=0 && enemy6_health <= 0) {
 			flattened_data[room_point_array[player_array_pos] + player_direction] = '<div id="door_open">_</div>';
 		} else {
+			document.getElementById("user_alert").style.visibility = "visible";
 			document.getElementById("user_alert").innerHTML = "Locked!";
 		}
 	

@@ -234,6 +234,7 @@ body {
 		display:inline;
 		bottom:5%;
 		right: 5%;
+		visibility: hidden;
 	}
 	
 #door_locked {
