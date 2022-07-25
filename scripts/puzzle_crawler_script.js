@@ -974,26 +974,26 @@ function logKey(e) {
 			}
 		} else {
 //D KEY
-			if (keypress == "KeyD") {
+			if (keypress == "KeyD" || keypress == "ArrowRight") {
 				if (death_state != 1) {
 					d_key_down();
 					draw_screen = 1;
 				}
 //A KEY
-			} else if (keypress == "KeyA") {
+			} else if (keypress == "KeyA" || keypress == "ArrowLeft") {
 				if (death_state != 1) {
 					a_key_down();
 					draw_screen = 1;
 				}
 //S KEY
-			} else if (keypress == "KeyS") {
+			} else if (keypress == "KeyS" || keypress == "ArrowDown") {
 				if (death_state != 1) {
 					s_key_down();
 					draw_screen = 1;
 				}
 				
 //W KEY
-			} else if (keypress == "KeyW") {
+			} else if (keypress == "KeyW" || keypress == "ArrowUp") {
 				if (death_state != 1) {
 					w_key_down();
 					draw_screen = 1;
