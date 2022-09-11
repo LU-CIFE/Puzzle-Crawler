@@ -1,15 +1,24 @@
-#text_container {
-	position: absolute;
-	left:1%;
-	margin-top:0.5%;
+#text_container, #text_container2 {
+	font-family: Courier New;
+	background-color:#181818;
+	text-align: center;
 	border-style: solid;
 	border-width: 1px;
-	height: 70%;
+	position: absolute;
+	height: fit-content;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	width: 12%;
-	font-family: Courier New;
-	text-align: center;
+	top:15.5%;
 }
 
+#text_container {
+	left: 3%;
+}
+
+#text_container2 {
+	right: 3%;
+}
 
 #browser_warn {
 	position: absolute;
@@ -37,18 +46,6 @@ body {
 	font-size: 45;
 }
 
-#text_container2 {
-	margin-top:0.5%;
-	position: absolute;
-	right:2%;
-	border-style: solid;
-	border-width: 1px;
-	height: 70%;
-	width: 12%;
-	font-family: Courier New;
-	text-align: center;
-}
-
 #status_container {
 	border-style:solid;
 		border-width: 1px;
@@ -63,258 +60,112 @@ body {
 	display:inline-block;
 }
 	
-	#text_container {
-		background-color:#181818;
-		position: absolute;
-		margin-left: 2%;
-		top:15%;
-		border-style: solid;
-		height: 70%;
-		width: 12%;
-		font-family: Courier New;
-		text-align: center;
-	}
-	
-	#game_container {
-		border-width: 1px;
-		background-color:#0d0d0d;
-		margin-left: auto;
-		margin-right:auto;
-		margin-top: 5%;
-		width: fit-content;
-		height: fit-content;
-		border-style: solid;
-		font-size:175%;
-		overflow: hidden;
-		padding:3px;
-		padding-left:18px;
-		padding-bottom:18px;
-		padding-top:13px;
-		letter-spacing: 15px;
-		font-family:monospace;
-		
-	}
-	
-	#browser_warn {
-		position: absolute;
-		top: 1%;
-		font-family: Courier New;
-		
-	}
-	
-	body {
-		background-color: #1f1f1f;
-	}
-	
-	#sprite_p {
-		display: inline;
-		color: #ab20fd;
-	}
-	
-	#sprite_p_rotate {
-		display: inline-block;
-		color: #ab20fd;
-	}
-	
-	#title_text {
-		position: absolute;
-		left:0;
-		right:0;
-		width:500px;
-		margin-left: auto; 
-		margin-right: auto; 
-		text-align: center;
-		font-family: monospace;
-		font-size: 45;
-	}
-	
-	#title_big_text {
-		overflow:hidden;
-		white-space:nowrap;
-	}
-	
-	#text_container2 {
-		background-color:#181818;
-		position: absolute;
-		right:2%;
-		top:15%;
-		border-style: solid;
-		height: 70%;
-		width: 12%;
-		font-family: Courier New;
-		text-align: center;
-	}
-	
-	#status_container {
-		background-color:#181818;
-		padding:10px;
-		font-family:monospace;
-		text-align: center; 
-		font-size:200%;
-		margin:auto;
-		width:fit-content;
-	}
-	
-	#puzzle_crawler {
-	}
-	
-	#health_container {
-		display:inline-block;
-	}
-	
-	#cash_container {
-		display:inline-block;
-	}
-	
-	#f_tier {
-		color:white;
-		display:inline;
-	}
-	
-	#d_tier {
-		color:90EE90;
-		display:inline;
-	}
-	
-	#c_tier {
-		color:blue;
-		display:inline;
-	}
-	
-	#b_tier {
-		color:#ab20fd;
-		display:inline;
-	}
-	
-	#a_tier {
-		color:#FF5F15;
-		display:inline;
-	}
-	
-	#s_tier {
-		display:inline;
-	}
-	
-	audio {
-	display:none;
-	}
-	
-	#door_open {
-		color:black;
-		display:inline;
-	}
-	
-	#highscore {
-		background-color:#181818;
-		border-style:solid;
-		border-width: 1px;
-		position:absolute;
-		font-family:monospace;
-		text-align:center;
-		padding:5px;
-		font-size:200%;
-		margin:auto;
-		width:fit-content;
-		display:inline;
-	}
-	
-	#rain_bow_1 {
-		display: inline;
-	}
-	
-	#user_alert {
-		background-color:#181818;
-		padding:5px;
-		position:absolute;
-		font-family:monospace;
-		text-align:center;
-		font-size:200%;
-		margin:auto;
-		width:fit-content;
-		display:inline;
-		bottom:5%;
-		right: 5%;
-		visibility: hidden;
-	}
-	
-#door_locked {
-	display: inline;
-	color:#C4A484;
-}
-	
-#cash_container {
-	display:inline-block;
-}
-	
-#atk_container {
-	display: inline-block;
-}
-#recovery_container {
-	display: inline-block;
+#game_container {
+	border-width: 1px;
+	background-color:#0d0d0d;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 5%;
+	width: fit-content;
+	height: fit-content;
+	border-style: solid;
+	font-size:175%;
+	overflow: hidden;
+	padding:3px;
+	padding-left:18px;
+	padding-bottom:18px;
+	padding-top:13px;
+	letter-spacing: 15px;
+	font-family:monospace;
 }
 
-#floor_level {
-	display:inline-block;
+#sprite_p {
+	display: inline;
+	color: #ab20fd;
 }
-#cash_container {
+
+#sprite_p_rotate {
+	display: inline-block;
+	color: #ab20fd;
+}
+
+#title_text {
+	position: absolute;
+	left:0;
+	right:0;
+	width:500px;
+	margin-left: auto; 
+	margin-right: auto; 
+	text-align: center;
+	font-family: monospace;
+	font-size: 45;
+}
+
+#title_big_text {
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+#status_container {
+	background-color:#181818;
+	padding:10px;
+	font-family:monospace;
+	text-align: center; 
+	font-size:200%;
+	margin:auto;
+	width:fit-content;
+}
+
+#health_container, #cash_container, #f_tier, #d_tier, #c_tier, #b_tier, #a_tier, #s_tier, #door_open, #door_locked, #rain_bow_1 {
 	display:inline-block;
 }
 
 #f_tier {
 	color:white;
-	display:inline;
 }
 
 #d_tier {
 	color:90EE90;
-	display:inline;
 }
 
 #c_tier {
 	color:blue;
-	display:inline;
 }
 
 #b_tier {
 	color:#ab20fd;
-	display:inline;
 }
 
 #a_tier {
-	color:orange;
-	display:inline;
+	color:#FF5F15;
 }
-	
-#s_tier {
-	display:inline;
+#door_open {
+	color:black;
+}
+
+#door_locked {
+	color:#C4A484;
 }
 
 audio {
-	display:none;
-}
-
-#door_open {
-	display:inline;
+display:none;
 }
 
 #highscore {
-	position:absolute;
+	background-color:#181818;
+	border-top-style:solid;
+	border-width: 1px;
 	font-family:monospace;
+	font-size: 150%;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-align:center;
-	font-size:200%;
-	margin:auto;
-	width:fit-content;
-	display:inline;
-	bottom:5%;
-	left: 5%;
-}
-
-#rain_bow_1 {
-	display: inline;
+	width:100%;
 }
 
 #user_alert {
-	display:none;
+	background-color:#181818;
+	padding:5px;
 	position:absolute;
 	font-family:monospace;
 	text-align:center;
@@ -324,33 +175,14 @@ audio {
 	display:inline;
 	bottom:5%;
 	right: 5%;
+	visibility: hidden;
 }
 
-#door_locked {
-	display: inline;
-	color:#C4A484;
-}
-
-#cash_container {
+#cash_container, #atk_container, #recovery_container, #floor_level {
 	display:inline-block;
 }
 
-#atk_container {
-	display: inline-block;
-}
-#recovery_container {
-	display: inline-block;
-}
-
-#floor_level {
-	display:inline-block;
-}
-
-a {
-	text-decoration:underline;
-}
-
-a:visited {
+a, a:visited {
 	text-decoration:underline;
 }
 
@@ -359,6 +191,7 @@ a:visited {
 h1 {
 	font-size:1.5em;
 }
+
 #main_button {
 	text-decoration: none;
 	position: absolute;
