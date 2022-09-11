@@ -32,20 +32,6 @@ body {
 	background-color: #1f1f1f;
 }
 
-
-
-#title_text {
-	position: absolute;
-	left:0;
-	right:0;
-	width:500px;
-	margin-left: auto; 
-	margin-right: auto; 
-	text-align: center;
-	font-family: monospace;
-	font-size: 45;
-}
-
 #status_container {
 	border-style:solid;
 		border-width: 1px;
@@ -65,7 +51,7 @@ body {
 	background-color:#0d0d0d;
 	margin-left: auto;
 	margin-right:auto;
-	margin-top: 5%;
+	margin-top: 1.5%;
 	width: fit-content;
 	height: fit-content;
 	border-style: solid;
@@ -90,20 +76,12 @@ body {
 }
 
 #title_text {
-	position: absolute;
-	left:0;
-	right:0;
-	width:500px;
+	width: fit-content;
 	margin-left: auto; 
 	margin-right: auto; 
 	text-align: center;
 	font-family: monospace;
 	font-size: 45;
-}
-
-#title_big_text {
-	overflow:hidden;
-	white-space:nowrap;
 }
 
 #status_container {
