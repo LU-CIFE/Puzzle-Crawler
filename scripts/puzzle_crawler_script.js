@@ -1,4 +1,4 @@
-console.log("danger zones: 23 46 69 92 115 138");
+console.log("danger page break zones: 23 46 69 92 115 138");
 
 //HTML elements
 var game_container = document.getElementById('game_container');

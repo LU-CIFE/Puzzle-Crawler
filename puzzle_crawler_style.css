@@ -34,7 +34,7 @@ body {
 
 #status_container {
 	border-style:solid;
-		border-width: 1px;
+	border-width: 1px;
 	border-top-style:none;
 	font-family:monospace;
 	text-align: center; 
@@ -42,10 +42,6 @@ body {
 	width:fit-content;
 }
 
-#health_container {
-	display:inline-block;
-}
-	
 #game_container {
 	border-width: 1px;
 	background-color:#0d0d0d;
@@ -65,13 +61,7 @@ body {
 	font-family:monospace;
 }
 
-#sprite_p {
-	display: inline;
-	color: #ab20fd;
-}
-
-#sprite_p_rotate {
-	display: inline-block;
+#sprite_p, #sprite_p_rotate {
 	color: #ab20fd;
 }
 
@@ -94,7 +84,7 @@ body {
 	width:fit-content;
 }
 
-#health_container, #cash_container, #f_tier, #d_tier, #c_tier, #b_tier, #a_tier, #s_tier, #door_open, #door_locked, #rain_bow_1 {
+#health_container, #sprite_p, #sprite_p_rotate, #cash_container, #f_tier, #d_tier, #c_tier, #b_tier, #a_tier, #s_tier, #door_open, #door_locked, #rain_bow_1 {
 	display:inline-block;
 }
 
